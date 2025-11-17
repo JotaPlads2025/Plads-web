@@ -1,0 +1,25 @@
+name = "plads-web"
+main = "src/index.js"
+compatibility_date = "2025-11-17"
+
+[env.production]
+name = "plads-web"
+vars = { ENVIRONMENT = "production" }
+
+[build]
+command = ""
+cwd = "."
+
+[[build.upload_rules]]
+pattern = "**"
+fallthrough = true
+
+[[assets.bindings]]
+binding = "ASSETS"
+
+[assets]
+dir = "."
+
+[env.production.routes]
+pattern = "plads.cl/*"
+zone_name = "plads.cl"
