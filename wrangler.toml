@@ -2,17 +2,14 @@ name = "plads-web"
 main = "src/index.js"
 compatibility_date = "2025-11-17"
 
-# Assets estáticos
 [assets]
 directory = "."
 binding = "ASSETS"
 
-# Ambiente de producción
 [env.production]
 name = "plads-web"
 vars = { ENVIRONMENT = "production" }
 
-# Rutas de producción
 [[env.production.routes]]
 pattern = "plads.cl/*"
 zone_name = "plads.cl"
