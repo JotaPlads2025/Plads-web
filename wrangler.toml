@@ -2,10 +2,10 @@ name = "plads-web"
 main = "src/index.js"
 compatibility_date = "2025-11-17"
 
-# Configuración de Assets (sintaxis correcta)
+# Assets estáticos
 [assets]
-directory = "."  # Cambio: 'dir' → 'directory'
-binding = "ASSETS"  # Movido desde assets.bindings
+directory = "."
+binding = "ASSETS"
 
 # Ambiente de producción
 [env.production]
