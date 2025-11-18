@@ -310,7 +310,7 @@
                 <p class="text-gray-600 mb-6 text-center">
                     ¿Tienes dudas, sugerencias, o quieres formar parte de nuestro equipo de instructores? Contáctanos.
                 </p>
-                <form onsubmit="return handleFormSubmit(event)">
+               <form id="contact-form" onsubmit="return handleFormSubmit(event)">
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
                         <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
@@ -451,19 +451,61 @@
          */
         function handleFormSubmit(event) {
             event.preventDefault();
-            contactMessage.classList.remove('hidden');
+           // Obtener elementos
+    const submitButton = document.getElementById('submit-button');
+    const contactMessage = document.getElementById('contact-message');
+    const form = document.getElementById('contact-form');
+    
+    // Mostrar indicador de carga
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Enviando...';
+    submitButton.disabled = true;
+    
+    // Preparar datos del formulario
+    const templateParams = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        to_email: 'hola@plads.cl'
+    };
+    
+    // Enviar email con EmailJS
+    emailjs.send('TU_SERVICE_ID', 'TU_TEMPLATE_ID', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
             
-            // Ocultar el mensaje después de unos segundos
+            // Mostrar mensaje de éxito
+            contactMessage.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
+            contactMessage.classList.remove('hidden', 'text-red-600');
+            contactMessage.classList.add('text-secondary-green');
+            
+            // Limpiar formulario
+            form.reset();
+            
+            // Ocultar mensaje después de 5 segundos
             setTimeout(() => {
                 contactMessage.classList.add('hidden');
-            }, 5000); 
-
-            // Aquí iría la lógica real para enviar el formulario a un servicio de backend
-            console.log('Formulario de contacto simulado enviado.');
-
-            return false; // Prevenir la recarga de la página
-        }
-
+            }, 5000);
+        }, function(error) {
+            console.log('FAILED...', error);
+            
+            // Mostrar mensaje de error
+            contactMessage.textContent = 'Error al enviar el mensaje. Por favor, intenta de nuevo.';
+            contactMessage.classList.remove('hidden', 'text-secondary-green');
+            contactMessage.classList.add('text-red-600');
+            
+            setTimeout(() => {
+                contactMessage.classList.add('hidden');
+            }, 3000);
+        })
+        .finally(() => {
+            // Restaurar botón
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+    
+    return false;
+}
         // Toggle del menú móvil
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
