@@ -397,6 +397,132 @@
         </form>
     </div>
 </section>
+
+        <!-- 4. Sección de Precios -->
+        <section id="precios" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple text-center mb-10 border-b-4 border-tertiary-sky pb-4">
+                Planes para Instructores
+            </h2>
+
+            <div class="max-w-6xl mx-auto">
+                <p class="text-xl text-gray-700 text-center mb-12">
+                    Elige el plan que mejor se adapte a tu negocio. Sin compromisos, cambia cuando quieras.
+                </p>
+
+                <!-- Grid de Planes -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Plan Comisión -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col border-2 border-gray-200 hover:shadow-2xl transition duration-300">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-primary-purple mb-2">Comisión</h3>
+                            <div class="mb-4">
+                                <p class="text-4xl font-bold text-gray-900">10%</p>
+                                <p class="text-sm font-medium text-secondary-green">por transacción</p>
+                            </div>
+                            <p class="text-gray-600">Ideal para empezar sin costos fijos. Solo pagas cuando generas ingresos.</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8 flex-grow text-sm">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Publicación de clases ilimitadas</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Gestión de agendamientos</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Perfil público</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Reportes básicos</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="showSection('contacto')" class="w-full bg-primary-purple text-white font-bold py-3 rounded-lg hover:bg-purple-800 transition duration-300">
+                            Comenzar Gratis
+                        </button>
+                    </div>
+
+                    <!-- Plan Básico -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col border-2 border-gray-200 hover:shadow-2xl transition duration-300">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-primary-purple mb-2">Básico</h3>
+                            <div class="mb-4">
+                                <p class="text-4xl font-bold text-gray-900">$14.990</p>
+                                <p class="text-sm font-medium text-secondary-green">mensual + 5% comisión</p>
+                            </div>
+                            <p class="text-gray-600">Reduce la comisión y accede a más herramientas para crecer.</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8 flex-grow text-sm">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span><span class="font-semibold">Todo en Comisión</span>, más:</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Reportes avanzados</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Campañas de email</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Soporte prioritario</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="showSection('contacto')" class="w-full bg-primary-purple text-white font-bold py-3 rounded-lg hover:bg-purple-800 transition duration-300">
+                            Solicitar Plan
+                        </button>
+                    </div>
+
+                    <!-- Plan Pro -->
+                    <div class="bg-white rounded-xl shadow-xl p-8 flex flex-col border-2 border-primary-purple ring-2 ring-primary-purple transform hover:scale-105 transition duration-300">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-2xl font-bold text-primary-purple">Pro</h3>
+                                <span class="bg-primary-purple text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-4xl font-bold text-gray-900">$29.990</p>
+                                <p class="text-sm font-medium text-secondary-green">mensual + 2.9% comisión</p>
+                            </div>
+                            <p class="text-gray-600">La comisión más baja y herramientas de IA para potenciar tu negocio.</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8 flex-grow text-sm">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span><span class="font-semibold">Todo en Básico</span>, más:</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Asistente IA para marketing</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Creación de academia</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Comisión más baja</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="showSection('contacto')" class="w-full bg-primary-purple text-white font-bold py-3 rounded-lg hover:bg-purple-800 transition duration-300 shadow-lg">
+                            Solicitar Plan Pro
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
         <!-- 4. Sección de Login / Dashboard -->
         <section id="login" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-4xl font-bold text-primary-purple text-center mb-10">
