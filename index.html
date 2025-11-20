@@ -149,12 +149,12 @@
     <main class="max-w-7xl mx-auto">
         
         <!-- 1. Sección de Inicio (Home) -->
-        <section id="inicio" class="section-container active p-8 md:p-16 bg-white rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500 futuristic-background">
+        <section id="inicio" class="section-container active p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500">
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
                     Descubre, Reserva y Paga. <span class="text-secondary-green">¡Empieza a Moverte!</span>
                 </h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
                 <span class="font-bold text-primary-purple">PLADS</span> es la Plataforma de Arte, Deporte & Salud que funciona como un ecosistema digital y marketplace, conectando a usuarios que buscan actividades con profesores independientes y academias.
                 </p>
                 <a href="#" onclick="event.preventDefault(); showSection('inicio')" class="inline-block bg-primary-purple text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-purple-800 transition duration-300 shadow-xl transform hover:scale-105">
@@ -164,14 +164,14 @@
 
             <!-- Explora por Categoría -->
             <div class="mt-16 pt-8 border-t border-gray-200">
-                <h2 class="text-3xl font-bold text-primary-purple text-center mb-6">
+                <h2 class="text-3xl font-bold text-primary-purple dark:text-secondary-green text-center mb-6">
                     Explora por Categoría <span class="text-tertiary-sky text-base block font-normal">(¡Se viene!)</span>
                 </h2>
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Tarjeta: Actividad Física -->
                     <div class="bg-primary-purple bg-opacity-90 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="showSection('servicios-general')">
                         <div class="flex justify-between items-start">
-                            <h3 class="text-3xl font-extrabold mb-2">Actividad Física</h3>
+                            <h3 class="text-3xl font-extrabold dark:text-secondary-green mb-2">Actividad Física</h3>
                             <svg class="w-10 h-10 text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9l-3 3m0 0l-3-3m3 3V3"></path></svg>
                         </div>
                         <p class="text-purple-200 mb-4">
@@ -187,7 +187,7 @@
                     <!-- Tarjeta: Baile -->
                     <div class="bg-secondary-green bg-opacity-90 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="showSection('servicios-general')">
                         <div class="flex justify-between items-start">
-                            <h3 class="text-3xl font-extrabold mb-2">Baile</h3>
+                            <h3 class="text-3xl font-extrabold dark:text-secondary-green mb-2">Baile</h3>
                             <svg class="w-10 h-10 text-primary-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M10 7H8a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V9a2 2 0 00-2-2h-2m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2"></path></svg>
                         </div>
                         <p class="text-green-100 mb-4">
@@ -204,15 +204,15 @@
         </section>
 
                 <!-- 1.5. Sección de Quiénes Somos (NUEVA) -->
-        <section id="quienes-somos" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple text-center mb-10 border-b-4 border-primary-purple pb-4">
+        <section id="quienes-somos" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple dark:text-secondary-green text-center mb-10 border-b-4 border-primary-purple pb-4">
                 Nuestra Historia: Misión, Propósito y Fundadores
             </h2>
 
             <div class="max-w-5xl mx-auto space-y-12">
                 <!-- FUNDADORES -->
                 <div class="bg-light-gray p-8 rounded-xl shadow-inner border-t-4 border-secondary-green">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-secondary-green mb-6 text-center">
                         Los Rostros Detrás de PLADS
                     </h3>
                     <div class="grid md:grid-cols-2 gap-8 text-center">
@@ -236,14 +236,14 @@
 
                 <!-- PROPÓSITO -->
                 <div class="space-y-4">
-                    <h3 class="text-3xl font-extrabold text-tertiary-sky mb-4 flex items-center">
+                    <h3 class="text-3xl font-extrabold text-tertiary-sky dark:text-secondary-green mb-4 flex items-center">
                         <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.275a1.996 1.996 0 00-2.828 0L9 10.172 5.207 6.379a1.996 1.996 0 10-2.828 2.828L7.379 13l-4.242 4.243a1.996 1.996 0 102.828 2.828L9 15.828l3.621 3.621a1.996 1.996 0 102.828-2.828L12.414 13l4.242-4.243a1.996 1.996 0 000-2.828z"></path></svg>
                         El Propósito Fundamental: La Creación de una Comunidad Digital
                     </h3>
                     <p class="text-lg text-gray-700 leading-relaxed">
                         Nuestro propósito es doble: <span class="font-bold">crear una comunidad digital vibrante</span> donde los usuarios encuentren actividades que los ayuden a crecer, entretenerse, liberar estrés o cuidar su salud. En paralelo, buscamos que los profesores tengan una herramienta que les <span class="font-bold">potencie, conecte y les permita dedicarse de lleno a su vocación: enseñar.</span>
                         </p>
-                    <p class="text-md text-gray-600 border-l-4 border-tertiary-sky pl-4 italic">
+                    <p class="text-md text-gray-600 dark:text-gray-300" border-l-4 border-tertiary-sky pl-4 italic">
                         Este enfoque aborda el desafío principal de los instructores en América Latina, que gastan energía valiosa en la gestión administrativa (pagos y agendamiento vía WhatsApp/Instagram). Al liberarles de estas tareas, PLADS asegura que su foco sea la enseñanza y el crecimiento.
                     </p>
                 </div>
@@ -254,7 +254,7 @@
                         <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         Nuestra Misión Operativa: Conectar, Gestionar y Crecer
                     </h3>
-                    <p class="text-lg text-gray-700 leading-relaxed">
+                    <p class="text-lg text-gray-700 dark:text-gray-300" leading-relaxed">
                         La misión de PLADS es <span class="font-bold text-primary-purple">conectar a personas con los mejores profesores de Arte, Deporte y Salud</span>, ofreciendo una plataforma para <span class="font-bold text-primary-purple">descubrir, reservar y pagar clases de forma fácil y segura</span>. Al mismo tiempo, entregamos a los profesores una plataforma integral de gestión y crecimiento profesional.
                     </p>
                     <p class="text-center font-bold text-xl text-primary-purple mt-6">
@@ -266,7 +266,7 @@
         </section>
 
         <!-- 2.1. Sección de Servicios - Visión General (Landing) -->
-        <section id="servicios-general" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+        <section id="servicios-general" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple text-center mb-12 border-b-4 border-tertiary-sky pb-4">
                 Visión General PLADS: Un Ecosistema para Crecer
             </h2>
@@ -316,7 +316,7 @@
         </section>
 
         <!-- 2.2. Sección de Servicios - Instructores (Landing) -->
-        <section id="servicios-instructores" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+        <section id="servicios-instructores" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-5xl font-extrabold text-secondary-green text-center mb-10 border-b-4 border-secondary-green pb-4">
                 PLADS para Instructores: Crece y Administra tu Academia
             </h2>
@@ -355,7 +355,7 @@
         </section>
 
         <!-- 2.3. Sección de Servicios - Usuarios (Landing) -->
-        <section id="servicios-usuarios" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+        <section id="servicios-usuarios" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-5xl font-extrabold text-tertiary-sky text-center mb-10 border-b-4 border-tertiary-sky pb-4">
                 PLADS para Usuarios: Empieza a Moverte y a Conectar
             </h2>
@@ -394,7 +394,7 @@
         </section>
 
 <!-- 3. Sección de Contacto -->
-<section id="contacto" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+<section id="contacto" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
     <h2 class="text-3xl md:text-4xl font-bold text-primary-purple text-center mb-10">
         Hablemos de tu Proyecto
     </h2>
@@ -405,15 +405,15 @@
         <form id="contact-form" onsubmit="return handleFormSubmit(event)">
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
-                <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
+                <input type="text" id="name" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
+                <input type="email" id="email" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
             </div>
             <div class="mb-6">
                 <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje</label>
-                <textarea id="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required></textarea>
+                <textarea id="message" rows="4" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required></textarea>
             </div>
             <button type="submit" id="submit-button" class="w-full bg-primary-purple text-white font-bold py-3 rounded-lg hover:bg-purple-800 transition duration-300 shadow-lg">
                 Enviar Mensaje
@@ -426,7 +426,7 @@
 </section>
 
         <!-- 4. Sección de Precios -->
-        <section id="precios" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+        <section id="precios" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple text-center mb-10 border-b-4 border-tertiary-sky pb-4">
                 Planes para Instructores
             </h2>
@@ -551,7 +551,7 @@
             </div>
         </section>
         <!-- 4. Sección de Login / Dashboard -->
-        <section id="login" class="section-container hidden p-8 md:p-16 bg-white rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+        <section id="login" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
             <h2 class="text-3xl md:text-4xl font-bold text-primary-purple text-center mb-10">
                 Tu Centro de Control: El Dashboard de PLADS
             </h2>
