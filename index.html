@@ -148,60 +148,60 @@
     <!-- Contenido Principal - Las Secciones (simulación de páginas) -->
     <main class="max-w-7xl mx-auto">
         
-        <!-- 1. Sección de Inicio (Home) -->
-        <section id="inicio" class="section-container active p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
-                    Descubre, Reserva y Paga. <span class="text-secondary-green">¡Empieza a Moverte!</span>
-                </h1>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-                <span class="font-bold text-primary-purple">PLADS</span> es la Plataforma de Arte, Deporte & Salud que funciona como un ecosistema digital y marketplace, conectando a usuarios que buscan actividades con profesores independientes y academias.
-                </p>
-                <a href="#" onclick="event.preventDefault(); showSection('inicio')" class="inline-block bg-primary-purple text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-purple-800 transition duration-300 shadow-xl transform hover:scale-105">
-                    Encuentra tu Clase Hoy
-                </a>
-            </div>
+<!-- 1. Sección de Inicio (Home) -->
+<section id="inicio" class="section-container active p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500">
+    <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+            Descubre, Reserva y Paga. <span class="text-secondary-green">¡Empieza a Moverte!</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            <span class="font-bold text-primary-purple dark:text-secondary-green">PLADS</span> es la Plataforma de Arte, Deporte & Salud que funciona como un ecosistema digital y marketplace, conectando a usuarios que buscan actividades con profesores independientes y academias.
+        </p>
+        <a href="#" onclick="event.preventDefault(); showSection('login')" class="inline-block bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl transform hover:scale-105">
+            Encuentra tu Clase Hoy
+        </a>
+    </div>
 
-            <!-- Explora por Categoría -->
-            <div class="mt-16 pt-8 border-t border-gray-200">
-                <h2 class="text-3xl font-bold text-primary-purple dark:text-secondary-green text-center mb-6">
-                    Explora por Categoría <span class="text-tertiary-sky text-base block font-normal">(¡Se viene!)</span>
-                </h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Tarjeta: Actividad Física -->
-                    <div class="bg-primary-purple bg-opacity-90 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="showSection('servicios-general')">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-3xl font-extrabold dark:text-secondary-green mb-2">Actividad Física</h3>
-                            <svg class="w-10 h-10 text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9l-3 3m0 0l-3-3m3 3V3"></path></svg>
-                        </div>
-                        <p class="text-purple-200 mb-4">
-                            Yoga, Pilates, Calistenia, Entrenamiento Funcional, Fitness y más.
-                        </p>
-                        <ul class="space-y-1 text-sm list-disc list-inside">
-                            <li>Clases grupales e individuales.</li>
-                            <li>Entrenadores certificados.</li>
-                            <li>Planes de seguimiento de progreso.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Tarjeta: Baile -->
-                    <div class="bg-secondary-green bg-opacity-90 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="showSection('servicios-general')">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-3xl font-extrabold dark:text-secondary-green mb-2">Baile</h3>
-                            <svg class="w-10 h-10 text-primary-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M10 7H8a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V9a2 2 0 00-2-2h-2m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2"></path></svg>
-                        </div>
-                        <p class="text-green-100 mb-4">
-                            Salsa, Bachata, Ballet, Danza Urbana y todas las disciplinas que te hacen vibrar.
-                        </p>
-                        <ul class="space-y-1 text-sm list-disc list-inside">
-                            <li>Academias y profesores especializados.</li>
-                            <li>Eventos y talleres.</li>
-                            <li>Comunidad activa de bailarines.</li>
-                        </ul>
-                    </div>
+    <!-- Explora por Categoría -->
+    <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <h2 class="text-3xl font-bold text-primary-purple dark:text-secondary-green text-center mb-6">
+            Explora por Categoría <span class="text-tertiary-sky text-base block font-normal">(¡Se viene!)</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Tarjeta: Actividad Física -->
+            <div class="bg-primary-purple bg-opacity-90 dark:bg-opacity-100 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="event.preventDefault(); showSection('servicios-general')">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-3xl font-extrabold mb-2">Actividad Física</h3>
+                    <svg class="w-10 h-10 text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9l-3 3m0 0l-3-3m3 3V3"></path></svg>
                 </div>
+                <p class="text-purple-200 mb-4">
+                    Yoga, Pilates, Calistenia, Entrenamiento Funcional, Fitness y más.
+                </p>
+                <ul class="space-y-1 text-sm list-disc list-inside">
+                    <li>Clases grupales e individuales.</li>
+                    <li>Entrenadores certificados.</li>
+                    <li>Planes de seguimiento de progreso.</li>
+                </ul>
             </div>
-        </section>
+
+            <!-- Tarjeta: Baile -->
+            <div class="bg-secondary-green bg-opacity-90 dark:bg-opacity-100 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="event.preventDefault(); showSection('servicios-general')">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-3xl font-extrabold mb-2">Baile</h3>
+                    <svg class="w-10 h-10 text-primary-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M10 7H8a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V9a2 2 0 00-2-2h-2m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2"></path></svg>
+                </div>
+                <p class="text-green-100 mb-4">
+                    Salsa, Bachata, Ballet, Danza Urbana y todas las disciplinas que te hacen vibrar.
+                </p>
+                <ul class="space-y-1 text-sm list-disc list-inside">
+                    <li>Academias y profesores especializados.</li>
+                    <li>Eventos y talleres.</li>
+                    <li>Comunidad activa de bailarines.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
                 <!-- 1.5. Sección de Quiénes Somos (NUEVA) -->
         <section id="quienes-somos" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
