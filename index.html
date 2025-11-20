@@ -624,28 +624,97 @@
         }
 
 
-        /**
-         * Muestra la sección solicitada y oculta las demás.
-         * La lógica de destacar el bloque ya no es necesaria, solo mostrar la sección completa.
-         * @param {string} sectionId - El ID de la sección a mostrar.
-         */
-        function showSection(sectionId) {
-            sections.forEach(section => {
-                // Ocultar todas las secciones
-                section.classList.add('hidden');
-                section.classList.remove('block');
-            });
+       /**
+     * Muestra la sección solicitada y actualiza la URL
+     * @param {string} sectionId - El ID de la sección a mostrar
+     * @param {boolean} updateHistory - Si debe actualizar el historial del navegador
+     */
+    function showSection(sectionId, updateHistory = true) {
+        sections.forEach(section => {
+            // Ocultar todas las secciones
+            section.classList.add('hidden');
+            section.classList.remove('block');
+        });
 
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                // Mostrar la sección objetivo
-                targetSection.classList.remove('hidden');
-                targetSection.classList.add('block');
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            // Mostrar la sección objetivo
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('block');
+            
+            // Actualizar la URL sin recargar la página
+            if (updateHistory) {
+                const newUrl = sectionId === 'inicio' ? '/' : `/${sectionId}`;
+                window.history.pushState({ section: sectionId }, '', newUrl);
+                
+                // Actualizar el título de la página
+                updatePageTitle(sectionId);
             }
-            // Asegura que siempre volvemos al inicio de la página al cambiar de sección
-            window.scrollTo(0, 0);
         }
-
+        
+        // Asegura que siempre volvemos al inicio de la página al cambiar de sección
+        window.scrollTo(0, 0);
+    }
+    
+    /**
+     * Actualiza el título de la página según la sección
+     */
+    function updatePageTitle(sectionId) {
+        const titles = {
+            'inicio': 'PLADS - Plataforma de Arte, Deporte & Salud',
+            'quienes-somos': 'Quiénes Somos - PLADS',
+            'servicios-general': 'Servicios - PLADS',
+            'servicios-instructores': 'Para Instructores - PLADS',
+            'servicios-usuarios': 'Para Usuarios - PLADS',
+            'precios': 'Precios - PLADS',
+            'contacto': 'Contacto - PLADS',
+            'login': 'Dashboard - PLADS'
+        };
+        
+        document.title = titles[sectionId] || 'PLADS';
+    }
+    
+    /**
+     * Maneja la navegación con los botones Atrás/Adelante del navegador
+     */
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.section) {
+            showSection(event.state.section, false);
+        } else {
+            // Si no hay estado, mostrar inicio
+            showSection('inicio', false);
+        }
+    });
+    
+    /**
+     * Detecta la URL al cargar la página y muestra la sección correspondiente
+     */
+    function loadSectionFromURL() {
+        const path = window.location.pathname;
+        
+        // Mapeo de rutas a IDs de sección
+        const routes = {
+            '/': 'inicio',
+            '/inicio': 'inicio',
+            '/quienes-somos': 'quienes-somos',
+            '/servicios-general': 'servicios-general',
+            '/servicios': 'servicios-general',
+            '/servicios-instructores': 'servicios-instructores',
+            '/instructores': 'servicios-instructores',
+            '/servicios-usuarios': 'servicios-usuarios',
+            '/usuarios': 'servicios-usuarios',
+            '/precios': 'precios',
+            '/contacto': 'contacto',
+            '/login': 'login',
+            '/dashboard': 'login'
+        };
+        
+        const sectionId = routes[path] || 'inicio';
+        showSection(sectionId, false);
+        
+        // Establecer el estado inicial
+        window.history.replaceState({ section: sectionId }, '', path);
+    }
         /**
          * Maneja el envío del formulario de contacto (solo simulación).
          */
