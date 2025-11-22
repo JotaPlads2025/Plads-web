@@ -107,53 +107,67 @@
     <a href="#" onclick="event.preventDefault(); showSection('login')" class="nav-link text-primary-purple bg-secondary-green px-4 py-2 rounded-lg hover:bg-green-400 transition duration-300 shadow-md font-bold">Login / Dashboard</a>
 </div>
 
-        <!-- Botón de Menú Móvil (Hamburguesa) -->
+      <!-- Botón de Menú Móvil (Hamburguesa) -->
         <button id="menu-button" class="md:hidden text-white focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
-            
-        <!-- Menú Móvil Desplegable -->
-<div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner pb-4">
-    <a href="#" onclick="event.preventDefault(); showSection('inicio'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 hover:bg-light-gray">Inicio</a>
+    </nav>  <!-- ← MUEVE EL </nav> AQUÍ -->
     
-    <a href="#" onclick="event.preventDefault(); showSection('quienes-somos'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 hover:bg-light-gray">Quiénes Somos</a>
-    
-    <!-- Dropdown para Servicios (Móvil) -->
-    <div class="border-t border-gray-100 mt-2 pt-2">
-        <button id="mobile-service-button" onclick="toggleServiceDropdown('mobile')" class="flex justify-between items-center w-full px-4 py-2 text-gray-600 hover:bg-light-gray">
-            Servicios
-            <svg id="mobile-dropdown-icon" class="w-4 h-4 transition duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div id="mobile-service-menu" class="hidden pl-4">
-            <a href="#" onclick="event.preventDefault(); showSection('servicios-general'); hideMobileMenu();" class="block px-4 py-2 text-sm text-gray-600 hover:bg-light-gray">Visión General</a>
-            <a href="#" onclick="event.preventDefault(); showSection('servicios-instructores'); hideMobileMenu();" class="block px-4 py-2 text-sm text-gray-600 hover:bg-light-gray">Instructores</a>
-            <a href="#" onclick="event.preventDefault(); showSection('servicios-usuarios'); hideMobileMenu();" class="block px-4 py-2 text-sm text-gray-600 hover:bg-light-gray">Usuarios</a>
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-inner pb-4">
+        <a href="#" onclick="event.preventDefault(); showSection('inicio'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Inicio</a>
+        
+        <a href="#" onclick="event.preventDefault(); showSection('quienes-somos'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Quiénes Somos</a>
+        
+        <!-- Dropdown para Servicios (Móvil) - MEJORADO -->
+        <div class="mt-2 mx-2">
+            <button id="mobile-service-button" onclick="toggleServiceDropdown('mobile')" class="flex justify-between items-center w-full px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg transition duration-200">
+                <span class="font-medium">Servicios</span>
+                <svg id="mobile-dropdown-icon" class="w-4 h-4 transition-all duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div id="mobile-service-menu" class="hidden mt-2 bg-light-gray dark:bg-gray-700 rounded-lg shadow-inner overflow-hidden transition-all duration-300">
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-general'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 border-b border-gray-200 dark:border-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Visión General
+                    </span>
+                </a>
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-instructores'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 border-b border-gray-200 dark:border-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Instructores
+                    </span>
+                </a>
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-usuarios'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Usuarios
+                    </span>
+                </a>
+            </div>
         </div>
+
+        <a href="#" onclick="event.preventDefault(); showSection('precios'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Precios</a>
+
+        <a href="#" onclick="event.preventDefault(); showSection('contacto'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Contacto</a>
+        
+        <a href="#" onclick="event.preventDefault(); showSection('login'); hideMobileMenu();" class="block px-4 py-2 text-primary-purple dark:text-gray-900 bg-secondary-green hover:bg-green-600 mx-4 mt-4 rounded-lg text-center font-bold transition duration-200">Login / Dashboard</a>
+        
+        <!-- Botón Modo Oscuro Móvil -->
+        <button id="dark-mode-toggle-mobile" class="flex items-center justify-center gap-2 mx-4 mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200">
+            <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <span id="dark-mode-text">Modo Oscuro</span>
+        </button>
     </div>
+</header>
 
-    <a href="#" onclick="event.preventDefault(); showSection('precios'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 hover:bg-light-gray">Precios</a>
-
-    <a href="#" onclick="event.preventDefault(); showSection('contacto'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 hover:bg-light-gray">Contacto</a>
-    
-    <a href="#" onclick="event.preventDefault(); showSection('login'); hideMobileMenu();" class="block px-4 py-2 text-primary-purple bg-secondary-green mx-4 mt-2 rounded-lg text-center font-bold">Login / Dashboard</a>
-
-    <!-- AGREGA ESTE BOTÓN AQUÍ -->
-<button id="dark-mode-toggle-mobile" class="flex items-center justify-center gap-2 mx-4 mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-gray-800 dark:text-gray-200">
-    <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-    </svg>
-    <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-    </svg>
-    <span id="dark-mode-text">Modo Oscuro</span>
-</button>
-    
-</div>
-
-    </header>
-
-    <!-- Contenido Principal - Las Secciones (simulación de páginas) -->
-    <main class="max-w-7xl mx-auto">
+<!-- Contenido Principal - Las Secciones (simulación de páginas) -->
+<main class="max-w-7xl mx-auto">
         
 <!-- 1. Sección de Inicio (Home) -->
 <section id="inicio" class="section-container active p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500">
