@@ -386,38 +386,131 @@
     </div>
 </section>
 
-       <!-- 2.3. Sección de Servicios - Usuarios (Landing) -->
+   <!-- 2.3. Sección de Servicios - Usuarios (Landing) -->
 <section id="servicios-usuarios" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
     <h2 class="text-3xl md:text-5xl font-extrabold text-tertiary-sky text-center mb-10 border-b-4 border-tertiary-sky pb-4">
         PLADS para Usuarios: Empieza a Moverte y a Conectar
     </h2>
 
-    <div class="max-w-4xl mx-auto space-y-8">
-        <p class="text-xl text-gray-700 dark:text-gray-300">
+    <div class="max-w-5xl mx-auto space-y-8">
+        <p class="text-xl text-gray-700 dark:text-gray-300 text-center">
             Encuentra la clase perfecta que se ajuste a tu horario, nivel y pasión. Olvídate de buscar en múltiples lugares; PLADS centraliza la mejor oferta de instructores calificados y verificados.
         </p>
 
-        <!-- Beneficios Detallados -->
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-tertiary-sky">
-                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Clases a tu Medida</h4>
-                <p class="text-gray-600 dark:text-gray-400">Busca por disciplina (Salsa, Yoga, Calistenia), por cercanía geográfica o por clases virtuales disponibles al instante.</p>
+        <!-- Botones de Categoría -->
+        <div class="flex justify-center gap-4 flex-wrap">
+            <button id="btn-baile" onclick="showCategory('baile')" class="px-8 py-3 bg-primary-purple text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 shadow-lg transform hover:scale-105">
+                🎵 Baile
+            </button>
+            <button id="btn-deporte" onclick="showCategory('deporte')" class="px-8 py-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold rounded-full hover:bg-gray-400 dark:hover:bg-gray-500 transition duration-300 shadow-lg transform hover:scale-105">
+                💪 Actividad Física
+            </button>
+        </div>
+
+        <!-- Tarjetas de Baile -->
+        <div id="category-baile" class="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in">
+            <div onclick="handleDisciplineClick('bachata')" class="bg-gradient-to-br from-pink-500 to-rose-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">💃</div>
+                <h3 class="font-bold text-lg">Bachata</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
             </div>
-            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-tertiary-sky">
-                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Reserva y Paga Fácilmente</h4>
-                <p class="text-gray-600 dark:text-gray-400">Reserva tu próxima clase en segundos a través del Dashboard, gestionando tus pagos de forma segura con un par de clics.</p>
+            
+            <div onclick="handleDisciplineClick('salsa')" class="bg-gradient-to-br from-red-500 to-orange-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🕺</div>
+                <h3 class="font-bold text-lg">Salsa</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
             </div>
-            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-tertiary-sky">
-                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Instructores Calificados</h4>
-                <p class="text-gray-600 dark:text-gray-400">Accede a perfiles detallados, valoraciones y certificaciones para que siempre te sientas seguro de tu elección.</p>
+            
+            <div onclick="handleDisciplineClick('kpop')" class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎤</div>
+                <h3 class="font-bold text-lg">K-pop</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
             </div>
-            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-tertiary-sky">
-                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Historial de Progreso</h4>
-                <p class="text-gray-600 dark:text-gray-400">Utiliza el Dashboard para ver tu historial de clases, medir tu consistencia y alcanzar tus metas de fitness.</p>
+            
+            <div onclick="handleDisciplineClick('tango')" class="bg-gradient-to-br from-gray-700 to-gray-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎩</div>
+                <h3 class="font-bold text-lg">Tango</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('dancehall')" class="bg-gradient-to-br from-yellow-500 to-orange-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🔥</div>
+                <h3 class="font-bold text-lg">Dancehall</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('urbano')" class="bg-gradient-to-br from-indigo-600 to-purple-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎧</div>
+                <h3 class="font-bold text-lg">Urbano</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('twerk')" class="bg-gradient-to-br from-fuchsia-600 to-pink-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🍑</div>
+                <h3 class="font-bold text-lg">Twerk</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('otros-baile')" class="bg-gradient-to-br from-slate-500 to-slate-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">✨</div>
+                <h3 class="font-bold text-lg">Otros</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
             </div>
         </div>
 
-        <div class="text-center pt-6">
+        <!-- Tarjetas de Actividad Física -->
+        <div id="category-deporte" class="hidden grid-cols-2 md:grid-cols-4 gap-4">
+            <div onclick="handleDisciplineClick('calistenia')" class="bg-gradient-to-br from-blue-600 to-cyan-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🤸</div>
+                <h3 class="font-bold text-lg">Calistenia</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('funcional')" class="bg-gradient-to-br from-green-600 to-emerald-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🏋️</div>
+                <h3 class="font-bold text-lg">Funcional</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('yoga')" class="bg-gradient-to-br from-purple-400 to-pink-500 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🧘</div>
+                <h3 class="font-bold text-lg">Yoga</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('pilates')" class="bg-gradient-to-br from-teal-500 to-cyan-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🤸‍♀️</div>
+                <h3 class="font-bold text-lg">Pilates</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('zumba')" class="bg-gradient-to-br from-orange-500 to-red-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">💃</div>
+                <h3 class="font-bold text-lg">Zumba</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('boxeo')" class="bg-gradient-to-br from-red-700 to-red-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🥊</div>
+                <h3 class="font-bold text-lg">Boxeo</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('crossfit')" class="bg-gradient-to-br from-gray-700 to-gray-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">⚡</div>
+                <h3 class="font-bold text-lg">CrossFit</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('otros-deporte')" class="bg-gradient-to-br from-slate-500 to-slate-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">✨</div>
+                <h3 class="font-bold text-lg">Otros</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="text-center pt-6 mt-8 border-t border-gray-200 dark:border-gray-700">
             <a href="#" onclick="event.preventDefault(); showSection('login')" class="inline-block bg-tertiary-sky hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl">
                 Encuentra tu Clase
             </a>
@@ -425,6 +518,7 @@
     </div>
 </section>
 
+    
 <!-- 3. Sección de Contacto -->
 <section id="contacto" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
     <h2 class="text-3xl md:text-4xl font-bold text-primary-purple dark:text-secondary-green text-center mb-10">
@@ -916,6 +1010,55 @@
 
         // Inicializar al cargar
         initDarkMode(); 
+
+        // ============================================
+// CATEGORÍAS DE DISCIPLINAS (Usuarios)
+// ============================================
+
+function showCategory(category) {
+    const baileCategory = document.getElementById('category-baile');
+    const deporteCategory = document.getElementById('category-deporte');
+    const btnBaile = document.getElementById('btn-baile');
+    const btnDeporte = document.getElementById('btn-deporte');
+    
+    if (category === 'baile') {
+        // Mostrar baile
+        baileCategory.classList.remove('hidden');
+        baileCategory.classList.add('grid');
+        deporteCategory.classList.remove('grid');
+        deporteCategory.classList.add('hidden');
+        
+        // Actualizar estilos de botones
+        btnBaile.classList.remove('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+        btnBaile.classList.add('bg-primary-purple', 'text-white');
+        btnDeporte.classList.remove('bg-primary-purple', 'text-white');
+        btnDeporte.classList.add('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+    } else {
+        // Mostrar deporte
+        deporteCategory.classList.remove('hidden');
+        deporteCategory.classList.add('grid');
+        baileCategory.classList.remove('grid');
+        baileCategory.classList.add('hidden');
+        
+        // Actualizar estilos de botones
+        btnDeporte.classList.remove('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+        btnDeporte.classList.add('bg-primary-purple', 'text-white');
+        btnBaile.classList.remove('bg-primary-purple', 'text-white');
+        btnBaile.classList.add('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+    }
+}
+
+function handleDisciplineClick(discipline) {
+    // Por ahora solo muestra un mensaje
+    // En el futuro, aquí irá la redirección: window.location.href = `/clases/${discipline}`;
+    console.log(`Clickeaste en: ${discipline}`);
+    alert(`Próximamente: Clases de ${discipline.charAt(0).toUpperCase() + discipline.slice(1)}`);
+    
+    // PARA EL FUTURO (descomenta cuando tengas las páginas):
+    // window.location.href = `/clases/${discipline}`;
+    // o
+    // showSection('lista-clases-' + discipline);
+}
     </script>
 </body>
 </html>
