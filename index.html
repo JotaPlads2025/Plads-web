@@ -3,48 +3,1058 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plads - Plataforma de Anuncios</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>PLADS - Plataforma de Aprendizaje y Desarrollo Social</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.dark-mode {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            border-bottom: 2px solid #667eea;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .navbar-link:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-top: 0.5rem;
+            z-index: 1001;
+        }
+
+        .dropdown.dark-mode .dropdown-menu {
+            background: #2d2d2d;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown.dark-mode .dropdown-link {
+            color: #f0f0f0;
+        }
+
+        .dropdown-link:hover {
+            background-color: #667eea;
+            color: white;
+            border-left-color: #764ba2;
+            padding-left: 2rem;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: rotate(20deg);
+        }
+
+        /* Section Styles */
+        .section {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 3rem 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #667eea;
+            text-align: center;
+        }
+
+        body.dark-mode .section-title {
+            color: #9fb3ff;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        body.dark-mode .section-subtitle {
+            color: #ccc;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            animation: slideInDown 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 0.8s ease;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #333;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            animation: slideInUp 1s ease;
+        }
+
+        .hero-cta:hover {
+            background-color: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        body.dark-mode .card {
+            background: #2d2d2d;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .card-title {
+            color: #9fb3ff;
+        }
+
+        .card-text {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        body.dark-mode .card-text {
+            color: #ccc;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        body.dark-mode .form-label {
+            color: #f0f0f0;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+            color: #333;
+        }
+
+        body.dark-mode .form-input,
+        body.dark-mode .form-textarea {
+            background: #3d3d3d;
+            color: #f0f0f0;
+            border-color: #555;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        body.dark-mode .footer {
+            background: #0a0a0a;
+            border-top: 2px solid #667eea;
+        }
+
+        .footer-text {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            width: 100%;
+            margin-bottom: 2rem;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+
+        body.dark-mode .pricing-table {
+            background: #2d2d2d;
+        }
+
+        .pricing-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .pricing-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .pricing-table td {
+            border-bottom-color: #555;
+        }
+
+        .pricing-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        body.dark-mode .pricing-table tr:hover {
+            background-color: #3d3d3d;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <h1>Plads</h1>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo" onclick="navigateTo('inicio')">
+                🎯 PLADS
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="#" class="navbar-link" onclick="navigateTo('inicio')">Inicio</a></li>
+                <li><a href="#" class="navbar-link" onclick="navigateTo('quienes-somos')">Quiénes Somos</a></li>
+                <li class="dropdown">
+                    <a href="#" class="navbar-link">Servicios ▼</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-general')">Información General</a>
+                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-instructores')">Para Instructores</a>
+                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-usuarios')">Para Usuarios</a>
+                    </div>
+                </li>
+                <li><a href="#" class="navbar-link" onclick="navigateTo('contacto')">Contacto</a></li>
+                <li><a href="#" class="navbar-link" onclick="navigateTo('precios')">Precios</a></li>
+                <li><a href="#" class="navbar-link" onclick="navigateTo('login')">Login/Dashboard</a></li>
+                <li><button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
     <main>
-        <section id="inicio">
-            <h2>Bienvenido a Plads</h2>
-            <p>Tu plataforma de anuncios confiable y segura.</p>
+        <!-- Inicio Section -->
+        <section id="inicio" class="section active hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Bienvenido a PLADS</h1>
+                <p class="hero-subtitle">Plataforma de Aprendizaje y Desarrollo Social</p>
+                <p style="margin-bottom: 2rem; opacity: 0.9;">Conectando instructores y usuarios en una comunidad de aprendizaje colaborativo</p>
+                <button class="hero-cta" onclick="navigateTo('quienes-somos')">Conoce Más</button>
+            </div>
         </section>
 
-        <section id="servicios">
-            <h2>Nuestros Servicios</h2>
-            <p>Publicar anuncios, buscar oportunidades y conectar con la comunidad.</p>
+        <!-- Quiénes Somos Section -->
+        <section id="quienes-somos" class="section">
+            <div class="section-container">
+                <h2 class="section-title">¿Quiénes Somos?</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">🎯 Nuestra Misión</h3>
+                        <p class="card-text">Crear una plataforma integral que conecte instructores y usuarios, facilitando el intercambio de conocimiento y experiencias en un ambiente seguro y colaborativo.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">👥 Nuestra Comunidad</h3>
+                        <p class="card-text">Somos una comunidad dedicada al movimiento social, promoviendo el aprendizaje continuo y el desarrollo personal a través de conexiones auténticas.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🌍 Nuestro Impacto</h3>
+                        <p class="card-text">Trabajamos para generar un impacto positivo en la sociedad, empoderando a individuos y comunidades a través de la educación y el desarrollo de habilidades.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Para más información, contáctanos.</p>
+        <!-- Servicios - General Section -->
+        <section id="servicios-general" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Servicios - Información General</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">📚 Cursos Disponibles</h3>
+                        <p class="card-text">Accede a una amplia variedad de cursos diseñados por expertos en diferentes áreas del conocimiento y desarrollo personal.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🎓 Certificaciones</h3>
+                        <p class="card-text">Obtén certificados reconocidos al completar tus cursos, validando tus nuevas habilidades y conocimientos ante la comunidad.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">💬 Comunidad Activa</h3>
+                        <p class="card-text">Participa en foros, webinarios y grupos de estudio con otros estudiantes y mentores de PLADS.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">📊 Seguimiento Progreso</h3>
+                        <p class="card-text">Monitorea tu avance con nuestro sistema de analytics detallado y recibe recomendaciones personalizadas.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🎯 Mentorías</h3>
+                        <p class="card-text">Conéctate con mentores experimentados que te guiarán en tu camino hacia el éxito profesional.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🌟 Recursos Premium</h3>
+                        <p class="card-text">Accede a materiales exclusivos, libros digitales y herramientas avanzadas con nuestro plan premium.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios - Instructores Section -->
+        <section id="servicios-instructores" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Servicios para Instructores</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">📝 Creación de Cursos</h3>
+                        <p class="card-text">Herramientas intuitivas para crear y organizar tus cursos con contenido multimedia, quizzes y tareas.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">👨‍🎓 Gestión de Estudiantes</h3>
+                        <p class="card-text">Panel de control completo para monitorear el progreso de tus estudiantes y proporcionar feedback personalizado.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">💰 Sistema de Ingresos</h3>
+                        <p class="card-text">Gana dinero con tus cursos. Recibe pagos automáticos y reportes detallados de tus ganancias.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">📈 Analytics Avanzado</h3>
+                        <p class="card-text">Obtén insights detallados sobre el rendimiento de tus cursos y la satisfacción de los estudiantes.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🎤 Webinarios en Vivo</h3>
+                        <p class="card-text">Realiza sesiones en vivo con tus estudiantes, con capacidad para cientos de participantes simultáneos.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🏆 Certificación Profesional</h3>
+                        <p class="card-text">Emite certificados profesionales a tus estudiantes una vez completan el curso.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios - Usuarios Section -->
+        <section id="servicios-usuarios" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Servicios para Usuarios</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">🎓 Aprendizaje Flexible</h3>
+                        <p class="card-text">Aprende a tu propio ritmo, accede a los cursos en cualquier momento y desde cualquier dispositivo.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🔍 Búsqueda Inteligente</h3>
+                        <p class="card-text">Encuentra los cursos perfectos para ti con nuestro sistema de recomendaciones basado en IA.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">💬 Soporte 24/7</h3>
+                        <p class="card-text">Accede a soporte técnico y educativo en cualquier momento. Nuestro equipo siempre está disponible.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🌐 Comunidad Global</h3>
+                        <p class="card-text">Conéctate con estudiantes de todo el mundo, comparte experiencias y amplía tu red profesional.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">📱 Acceso Móvil</h3>
+                        <p class="card-text">Continúa tu aprendizaje en movimiento con nuestra aplicación móvil optimizada para iOS y Android.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">🎁 Recompensas y Beneficios</h3>
+                        <p class="card-text">Gana puntos por cada curso completado y canjéalos por descuentos y acceso a contenido premium.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto Section -->
+        <section id="contacto" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Contacto</h2>
+                <p class="section-subtitle">¿Tienes preguntas? Nos encantaría escucharte</p>
+                
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div id="contact-message"></div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="asunto">Asunto</label>
+                            <input type="text" id="asunto" name="asunto" class="form-input" placeholder="Asunto del mensaje" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" class="form-textarea" placeholder="Tu mensaje..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-button">Enviar Mensaje</button>
+                    </form>
+
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <h3 class="card-title">Información de Contacto</h3>
+                        <p style="margin: 1rem 0;">📧 Email: contacto@plads.com</p>
+                        <p style="margin: 1rem 0;">📱 Teléfono: +1 (555) 123-4567</p>
+                        <p style="margin: 1rem 0;">📍 Ubicación: Calle Principal 123, Ciudad, País</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Precios Section -->
+        <section id="precios" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Planes de Precios</h2>
+                <p class="section-subtitle">Elige el plan perfecto para ti</p>
+                
+                <div class="grid">
+                    <div class="card" style="text-align: center;">
+                        <h3 class="card-title">Plan Básico</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">$9.99</p>
+                        <p style="color: #999; margin-bottom: 1.5rem;">/mes</p>
+                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
+                            <li style="margin: 0.5rem 0;">✅ Acceso a 50+ cursos</li>
+                            <li style="margin: 0.5rem 0;">✅ Certificados básicos</li>
+                            <li style="margin: 0.5rem 0;">❌ Mentorías</li>
+                            <li style="margin: 0.5rem 0;">❌ Contenido premium</li>
+                        </ul>
+                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Seleccionar</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; border: 2px solid #667eea;">
+                        <p style="color: #667eea; font-weight: bold; margin-bottom: 1rem;">⭐ MÁS POPULAR</p>
+                        <h3 class="card-title">Plan Pro</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">$24.99</p>
+                        <p style="color: #999; margin-bottom: 1.5rem;">/mes</p>
+                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
+                            <li style="margin: 0.5rem 0;">✅ Acceso ilimitado a cursos</li>
+                            <li style="margin: 0.5rem 0;">✅ Certificados profesionales</li>
+                            <li style="margin: 0.5rem 0;">✅ Mentorías mensuales</li>
+                            <li style="margin: 0.5rem 0;">✅ Contenido premium</li>
+                        </ul>
+                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Seleccionar</button>
+                    </div>
+
+                    <div class="card" style="text-align: center;">
+                        <h3 class="card-title">Plan Empresarial</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">Personalizado</p>
+                        <p style="color: #999; margin-bottom: 1.5rem;">Soluciones a medida</p>
+                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
+                            <li style="margin: 0.5rem 0;">✅ Acceso empresarial completo</li>
+                            <li style="margin: 0.5rem 0;">✅ Soporte dedicado 24/7</li>
+                            <li style="margin: 0.5rem 0;">✅ Programas de capacitación</li>
+                            <li style="margin: 0.5rem 0;">✅ Integraciones personalizadas</li>
+                        </ul>
+                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Contactar Ventas</button>
+                    </div>
+                </div>
+
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Básico</th>
+                            <th>Pro</th>
+                            <th>Empresarial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cursos disponibles</strong></td>
+                            <td>50+</td>
+                            <td>Ilimitados</td>
+                            <td>Ilimitados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Certificados</strong></td>
+                            <td>Básicos</td>
+                            <td>Profesionales</td>
+                            <td>Profesionales</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mentorías</strong></td>
+                            <td>No</td>
+                            <td>Sí (Mensual)</td>
+                            <td>Sí (Semanal)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contenido Premium</strong></td>
+                            <td>No</td>
+                            <td>Sí</td>
+                            <td>Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Soporte</strong></td>
+                            <td>Email</td>
+                            <td>Email y Chat</td>
+                            <td>24/7 Dedicado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acceso Móvil</strong></td>
+                            <td>Sí</td>
+                            <td>Sí</td>
+                            <td>Sí</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Login/Dashboard Section -->
+        <section id="login" class="section">
+            <div class="section-container">
+                <h2 class="section-title">Login / Dashboard</h2>
+                
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <div id="login-section">
+                        <div class="card">
+                            <h3 class="card-title" style="text-align: center;">Inicia Sesión</h3>
+                            <div id="login-message"></div>
+                            <form id="loginForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="login-email">Email</label>
+                                    <input type="email" id="login-email" name="email" class="form-input" placeholder="tu@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="login-password">Contraseña</label>
+                                    <input type="password" id="login-password" name="password" class="form-input" placeholder="Tu contraseña" required>
+                                </div>
+                                
+                                <button type="submit" class="form-button">Inicia Sesión</button>
+                            </form>
+                            
+                            <p style="text-align: center; margin-top: 1.5rem;">
+                                ¿No tienes cuenta? <a href="#" onclick="toggleAuthMode()" style="color: #667eea; text-decoration: none; font-weight: bold;">Regístrate aquí</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="register-section" style="display: none;">
+                        <div class="card">
+                            <h3 class="card-title" style="text-align: center;">Crear Cuenta</h3>
+                            <div id="register-message"></div>
+                            <form id="registerForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="register-nombre">Nombre Completo</label>
+                                    <input type="text" id="register-nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="register-email">Email</label>
+                                    <input type="email" id="register-email" name="email" class="form-input" placeholder="tu@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="register-password">Contraseña</label>
+                                    <input type="password" id="register-password" name="password" class="form-input" placeholder="Crea una contraseña" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="register-tipo">Tipo de Usuario</label>
+                                    <select id="register-tipo" name="tipo" class="form-input" required>
+                                        <option value="">Selecciona tu tipo</option>
+                                        <option value="estudiante">Estudiante</option>
+                                        <option value="instructor">Instructor</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="form-button">Crear Cuenta</button>
+                            </form>
+                            
+                            <p style="text-align: center; margin-top: 1.5rem;">
+                                ¿Ya tienes cuenta? <a href="#" onclick="toggleAuthMode()" style="color: #667eea; text-decoration: none; font-weight: bold;">Inicia sesión aquí</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard" style="display: none; margin-top: 2rem;">
+                    <div class="card" style="text-align: center;">
+                        <h3 class="card-title">Bienvenido al Dashboard</h3>
+                        <p style="margin: 1rem 0;">Aquí podrás ver tus cursos, progreso y mensajes.</p>
+                        <button class="hero-cta" onclick="logout()" style="width: auto; margin-top: 1rem;">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Plads. Todos los derechos reservados.</p>
-            <ul class="footer-links">
-                <li><a href="terms.html">Términos y Condiciones</a></li>
-                <li><a href="privacy.html">Política de Privacidad</a></li>
-            </ul>
-        </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">&copy; 2025 PLADS - Plataforma de Aprendizaje y Desarrollo Social. Todos los derechos reservados.</div>
+        <div class="footer-text">Hecho con ❤️ para conectar el movimiento</div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Initialize EmailJS
+        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your actual public key
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            body.classList.toggle('dark-mode');
+            navbar.classList.toggle('dark-mode');
+            dropdowns.forEach(dropdown => dropdown.classList.toggle('dark-mode'));
+            
+            // Save preference
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            
+            // Update icon
+            const toggle = document.querySelector('.dark-mode-toggle');
+            toggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        // Load dark mode preference
+        window.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('darkMode') === 'true') {
+                toggleDarkMode();
+            }
+        });
+
+        // Navigation
+        function navigateTo(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Auth Mode Toggle
+        function toggleAuthMode() {
+            const loginSection = document.getElementById('login-section');
+            const registerSection = document.getElementById('register-section');
+            
+            loginSection.style.display = loginSection.style.display === 'none' ? 'block' : 'none';
+            registerSection.style.display = registerSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simulate login
+            if (email && password) {
+                localStorage.setItem('user', JSON.stringify({ email, name: email.split('@')[0] }));
+                showLoginMessage('¡Bienvenido! Has iniciado sesión correctamente.', 'success');
+                
+                setTimeout(() => {
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    document.getElementById('loginForm').reset();
+                }, 1500);
+            }
+        });
+
+        // Register Form Handler
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('register-nombre').value;
+            const email = document.getElementById('register-email').value;
+            const tipo = document.getElementById('register-tipo').value;
+            
+            // Simulate registration
+            if (nombre && email && tipo) {
+                localStorage.setItem('user', JSON.stringify({ email, name: nombre, tipo }));
+                showRegisterMessage('¡Cuenta creada exitosamente!', 'success');
+                
+                setTimeout(() => {
+                    document.getElementById('register-section').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    document.getElementById('registerForm').reset();
+                }, 1500);
+            }
+        });
+
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const templateParams = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                asunto: document.getElementById('asunto').value,
+                mensaje: document.getElementById('mensaje').value
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    showContactMessage('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    showContactMessage('Hubo un error al enviar el mensaje. Intenta más tarde.', 'error');
+                    console.log('EmailJS error:', error);
+                });
+        });
+
+        // Message Display Functions
+        function showContactMessage(message, type) {
+            const messageDiv = document.getElementById('contact-message');
+            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function showLoginMessage(message, type) {
+            const messageDiv = document.getElementById('login-message');
+            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function showRegisterMessage(message, type) {
+            const messageDiv = document.getElementById('register-message');
+            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Logout Function
+        function logout() {
+            localStorage.removeItem('user');
+            document.getElementById('login-section').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            navigateTo('login');
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('user');
+            if (user && document.getElementById('dashboard')) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
