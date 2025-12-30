@@ -3,1058 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLADS - Plataforma de Aprendizaje y Desarrollo Social</title>
+    <title>PLADS - Plataforma de Arte, Deporte & Salud</title>
+    <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Configuración de Tailwind para un estilo moderno con la nueva paleta de colores -->
+    <script>
+        tailwind.config = {
+            darkMode:'class', // Habilitar modo oscuro con clase
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-purple': '#4a3186', // Morado principal
+                        'secondary-green': '#5ee783', // Verde complementario
+                        'tertiary-sky': '#38bdf8', // Azul medio/Celeste (Sky Blue)
+                        'light-gray': '#f3f4f6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Estilos básicos para el cuerpo y transiciones suaves */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
         }
-
-        body.dark-mode {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.dark-mode {
-            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-            border-bottom: 2px solid #667eea;
-        }
-
-        .navbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .navbar-link {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .navbar-link:hover {
-            color: #ffd700;
-            transform: translateY(-2px);
-        }
-
-        .navbar-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #ffd700;
-            transition: width 0.3s ease;
-        }
-
-        .navbar-link:hover::after {
-            width: 100%;
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            min-width: 200px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin-top: 0.5rem;
-            z-index: 1001;
-        }
-
-        .dropdown.dark-mode .dropdown-menu {
-            background: #2d2d2d;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dropdown-link {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown.dark-mode .dropdown-link {
-            color: #f0f0f0;
-        }
-
-        .dropdown-link:hover {
-            background-color: #667eea;
-            color: white;
-            border-left-color: #764ba2;
-            padding-left: 2rem;
-        }
-
-        .dark-mode-toggle {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            transform: rotate(20deg);
-        }
-
-        /* Section Styles */
-        .section {
-            display: none;
-            min-height: calc(100vh - 80px);
-            padding: 3rem 2rem;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            min-height: calc(100vh - 80px); /* Ajuste para el header fijo */
+            padding-top: 140px; /* Aumentado para móvil */
         }
 
-        .section-title {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            color: #667eea;
-            text-align: center;
+        /* Ajuste adicional para pantallas grandes */
+        @media (min-width: 768px) {
+            .section-container {
+                padding-top: 100px;
+
+                    /* Espacio extra para el H1 en móvil */
+         .section-container h1 {
+                margin-top: 20px;
         }
 
-        body.dark-mode .section-title {
-            color: #9fb3ff;
-        }
-
-        .section-subtitle {
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        body.dark-mode .section-subtitle {
-            color: #ccc;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            animation: slideInDown 0.8s ease;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: slideInUp 0.8s ease;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            background-color: #ffd700;
-            color: #333;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            animation: slideInUp 1s ease;
-        }
-
-        .hero-cta:hover {
-            background-color: #ffed4e;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        @media (min-width: 768px) {
+            .section-container h1 {
+                margin-top: 0;
             }
         }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+    
             }
         }
-
-        /* Card Styles */
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            margin-bottom: 2rem;
+        /* Estilos para el efecto futurista sutil */
+        .futuristic-background {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            /* Animación sutil para un fondo menos plano */
+            animation: gradient-shift 10s ease infinite alternate;
         }
-
-        body.dark-mode .card {
-            background: #2d2d2d;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        body.dark-mode .card-title {
-            color: #9fb3ff;
-        }
-
-        .card-text {
-            color: #555;
-            line-height: 1.8;
-        }
-
-        body.dark-mode .card-text {
-            color: #ccc;
-        }
-
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        body.dark-mode .form-label {
-            color: #f0f0f0;
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: white;
-            color: #333;
-        }
-
-        body.dark-mode .form-input,
-        body.dark-mode .form-textarea {
-            background: #3d3d3d;
-            color: #f0f0f0;
-            border-color: #555;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .form-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .form-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .form-button:active {
-            transform: translateY(0);
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        body.dark-mode .footer {
-            background: #0a0a0a;
-            border-top: 2px solid #667eea;
-        }
-
-        .footer-text {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Pricing Table */
-        .pricing-table {
-            width: 100%;
-            margin-bottom: 2rem;
-            border-collapse: collapse;
-            border-radius: 8px;
-            overflow: hidden;
-            background: white;
-        }
-
-        body.dark-mode .pricing-table {
-            background: #2d2d2d;
-        }
-
-        .pricing-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: bold;
-        }
-
-        .pricing-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        body.dark-mode .pricing-table td {
-            border-bottom-color: #555;
-        }
-
-        .pricing-table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        body.dark-mode .pricing-table tr:hover {
-            background-color: #3d3d3d;
-        }
-
-        /* Alert Messages */
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            animation: slideDown 0.3s ease;
-        }
-
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar-menu {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
+        /* Estilo para el degradado del header */
+        .header-gradient {
+            background-image: linear-gradient(to right, #4a3186, #5ee783);
         }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-logo" onclick="navigateTo('inicio')">
-                🎯 PLADS
-            </a>
-            <ul class="navbar-menu">
-                <li><a href="#" class="navbar-link" onclick="navigateTo('inicio')">Inicio</a></li>
-                <li><a href="#" class="navbar-link" onclick="navigateTo('quienes-somos')">Quiénes Somos</a></li>
-                <li class="dropdown">
-                    <a href="#" class="navbar-link">Servicios ▼</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-general')">Información General</a>
-                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-instructores')">Para Instructores</a>
-                        <a href="#" class="dropdown-link" onclick="navigateTo('servicios-usuarios')">Para Usuarios</a>
+<body class="bg-light-gray dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+<!-- Navbar Fija y Responsiva con Degradado -->
+<header class="fixed top-0 left-0 right-0 z-10 shadow-lg header-gradient">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-4 flex justify-between items-center">
+        
+        <!-- Logo PLADS (Izquierda) -->
+        <a href="#" onclick="event.preventDefault(); showSection('inicio')" class="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition duration-300">
+            <img src="assets/images/favicon.png" alt="PLADS Logo" class="w-8 h-8 object-contain">
+            <span class="text-2xl font-extrabold text-white">PLADS</span>
+        </a>
+
+        <!-- Menú de Navegación Desktop (Derecha) -->
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="#" onclick="event.preventDefault(); showSection('inicio')" class="nav-link text-white hover:text-light-gray font-medium transition duration-300">Inicio</a>
+
+            <a href="#" onclick="event.preventDefault(); showSection('quienes-somos')" class="nav-link text-white hover:text-light-gray font-medium transition duration-300">Quiénes Somos</a>
+
+            <!-- Dropdown para Servicios (Desktop) -->
+            <div class="relative group" onmouseleave="hideServiceDropdown('desktop')">
+                <button id="service-dropdown-button-desktop" onclick="toggleServiceDropdown('desktop')" class="text-white hover:text-light-gray font-medium transition duration-300 flex items-center p-2 rounded-lg focus:outline-none">
+                    Servicios
+                    <svg id="dropdown-icon-desktop" class="w-4 h-4 ml-1 transition duration-300 transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="service-dropdown-menu-desktop" class="absolute z-20 hidden w-44 mt-0.5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 origin-top-right right-0">
+                    <div class="py-1">
+                        <a href="#" onclick="event.preventDefault(); showSection('servicios-general'); hideServiceDropdown('desktop');" class="block px-4 py-2 text-sm text-gray-700 hover:bg-light-gray">Visión General</a>
+                        <a href="#" onclick="event.preventDefault(); showSection('servicios-instructores'); hideServiceDropdown('desktop');" class="block px-4 py-2 text-sm text-gray-700 hover:bg-light-gray">Instructores</a>
+                        <a href="#" onclick="event.preventDefault(); showSection('servicios-usuarios'); hideServiceDropdown('desktop');" class="block px-4 py-2 text-sm text-gray-700 hover:bg-light-gray">Usuarios</a>
                     </div>
-                </li>
-                <li><a href="#" class="navbar-link" onclick="navigateTo('contacto')">Contacto</a></li>
-                <li><a href="#" class="navbar-link" onclick="navigateTo('precios')">Precios</a></li>
-                <li><a href="#" class="navbar-link" onclick="navigateTo('login')">Login/Dashboard</a></li>
-                <li><button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button></li>
-            </ul>
+                </div>
+            </div>
+
+            <a href="#" onclick="event.preventDefault(); showSection('precios')" class="nav-link text-white hover:text-light-gray font-medium transition duration-300">Precios</a>
+
+            <a href="#" onclick="event.preventDefault(); showSection('contacto')" class="nav-link text-white hover:text-light-gray font-medium transition duration-300">Contacto</a>
+
+            <!-- Botón Modo Oscuro Desktop -->
+            <button id="dark-mode-toggle" class="text-white hover:text-light-gray transition duration-300 p-2 rounded-lg" title="Cambiar tema">
+                <svg id="sun-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg id="moon-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+
+            <a href="#" onclick="event.preventDefault(); showSection('login')" class="nav-link text-primary-purple bg-secondary-green px-4 py-2 rounded-lg hover:bg-green-400 transition duration-300 shadow-md font-bold">Login / Dashboard</a>
         </div>
-    </nav>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Inicio Section -->
-        <section id="inicio" class="section active hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Bienvenido a PLADS</h1>
-                <p class="hero-subtitle">Plataforma de Aprendizaje y Desarrollo Social</p>
-                <p style="margin-bottom: 2rem; opacity: 0.9;">Conectando instructores y usuarios en una comunidad de aprendizaje colaborativo</p>
-                <button class="hero-cta" onclick="navigateTo('quienes-somos')">Conoce Más</button>
+
+
+      <!-- Botón de Menú Móvil (Hamburguesa) -->
+        <button id="menu-button" class="md:hidden text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+    </nav>  <!-- ← MUEVE EL </nav> AQUÍ -->
+    
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-inner pb-4">
+        <a href="#" onclick="event.preventDefault(); showSection('inicio'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Inicio</a>
+        
+        <a href="#" onclick="event.preventDefault(); showSection('quienes-somos'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Quiénes Somos</a>
+        
+        <!-- Dropdown para Servicios (Móvil) - MEJORADO -->
+        <div class="mt-2 mx-2">
+            <button id="mobile-service-button" onclick="toggleServiceDropdown('mobile')" class="flex justify-between items-center w-full px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg transition duration-200">
+                <span class="font-medium">Servicios</span>
+                <svg id="mobile-dropdown-icon" class="w-4 h-4 transition-all duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div id="mobile-service-menu" class="hidden mt-2 bg-light-gray dark:bg-gray-700 rounded-lg shadow-inner overflow-hidden transition-all duration-300">
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-general'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 border-b border-gray-200 dark:border-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Visión General
+                    </span>
+                </a>
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-instructores'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 border-b border-gray-200 dark:border-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Instructores
+                    </span>
+                </a>
+                <a href="#" onclick="event.preventDefault(); showSection('servicios-usuarios'); hideMobileMenu();" class="block px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        Usuarios
+                    </span>
+                </a>
             </div>
-        </section>
+        </div>
 
-        <!-- Quiénes Somos Section -->
-        <section id="quienes-somos" class="section">
-            <div class="section-container">
-                <h2 class="section-title">¿Quiénes Somos?</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3 class="card-title">🎯 Nuestra Misión</h3>
-                        <p class="card-text">Crear una plataforma integral que conecte instructores y usuarios, facilitando el intercambio de conocimiento y experiencias en un ambiente seguro y colaborativo.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">👥 Nuestra Comunidad</h3>
-                        <p class="card-text">Somos una comunidad dedicada al movimiento social, promoviendo el aprendizaje continuo y el desarrollo personal a través de conexiones auténticas.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🌍 Nuestro Impacto</h3>
-                        <p class="card-text">Trabajamos para generar un impacto positivo en la sociedad, empoderando a individuos y comunidades a través de la educación y el desarrollo de habilidades.</p>
-                    </div>
+        <a href="#" onclick="event.preventDefault(); showSection('precios'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Precios</a>
+
+        <a href="#" onclick="event.preventDefault(); showSection('contacto'); hideMobileMenu();" class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-light-gray dark:hover:bg-gray-700 rounded-lg mx-2 my-1 transition duration-200">Contacto</a>
+        
+        <a href="#" onclick="event.preventDefault(); showSection('login'); hideMobileMenu();" class="block px-4 py-2 text-primary-purple dark:text-gray-900 bg-secondary-green hover:bg-green-600 mx-4 mt-4 rounded-lg text-center font-bold transition duration-200">Login / Dashboard</a>
+        
+        <!-- Botón Modo Oscuro Móvil -->
+        <button id="dark-mode-toggle-mobile" class="flex items-center justify-center gap-2 mx-4 mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200">
+            <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <span id="dark-mode-text">Modo Oscuro</span>
+        </button>
+    </div>
+</header>
+
+<!-- Contenido Principal - Las Secciones (simulación de páginas) -->
+<main class="max-w-7xl mx-auto">
+        
+<!-- 1. Sección de Inicio (Home) -->
+<section id="inicio" class="section-container active p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-2xl m-4 md:m-8 transition-all duration-500">
+    <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+            Descubre, Reserva y Paga. <span class="text-secondary-green">¡Empieza a Moverte!</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            <span class="font-bold text-primary-purple dark:text-secondary-green">PLADS</span> es la Plataforma de Arte, Deporte & Salud que funciona como un ecosistema digital y marketplace, conectando a usuarios que buscan actividades con profesores independientes y academias.
+        </p>
+        <a href="#" onclick="event.preventDefault(); showSection('login')" class="inline-block bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl transform hover:scale-105">
+            Encuentra tu Clase Hoy
+        </a>
+    </div>
+
+    <!-- Explora por Categoría -->
+    <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <h2 class="text-3xl font-bold text-primary-purple dark:text-secondary-green text-center mb-6">
+            Explora por Categoría <span class="text-tertiary-sky text-base block font-normal">(¡Se viene!)</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Tarjeta: Actividad Física -->
+            <div class="bg-primary-purple bg-opacity-90 dark:bg-opacity-100 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="event.preventDefault(); showSection('servicios-general')">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-3xl font-extrabold mb-2">Actividad Física</h3>
+                    <svg class="w-10 h-10 text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9l-3 3m0 0l-3-3m3 3V3"></path></svg>
+                </div>
+                <p class="text-purple-200 mb-4">
+                    Yoga, Pilates, Calistenia, Entrenamiento Funcional, Fitness y más.
+                </p>
+                <ul class="space-y-1 text-sm list-disc list-inside">
+                    <li>Clases grupales e individuales.</li>
+                    <li>Entrenadores certificados.</li>
+                    <li>Planes de seguimiento de progreso.</li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta: Baile -->
+            <div class="bg-secondary-green bg-opacity-90 dark:bg-opacity-100 p-8 rounded-2xl shadow-xl text-white transform hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="event.preventDefault(); showSection('servicios-general')">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-3xl font-extrabold mb-2">Baile</h3>
+                    <svg class="w-10 h-10 text-primary-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M10 7H8a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V9a2 2 0 00-2-2h-2m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2"></path></svg>
+                </div>
+                <p class="text-green-100 mb-4">
+                    Salsa, Bachata, Ballet, Danza Urbana y todas las disciplinas que te hacen vibrar.
+                </p>
+                <ul class="space-y-1 text-sm list-disc list-inside">
+                    <li>Academias y profesores especializados.</li>
+                    <li>Eventos y talleres.</li>
+                    <li>Comunidad activa de bailarines.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 1.5. Sección Quiénes Somos -->
+<section id="quienes-somos" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple dark:text-secondary-green text-center mb-10 border-b-4 border-primary-purple dark:border-secondary-green pb-4">
+        Nuestra Historia: Misión, Propósito y Fundadores
+    </h2>
+
+    <div class="max-w-5xl mx-auto space-y-12">
+        <!-- FUNDADORES -->
+        <div class="bg-light-gray dark:bg-gray-700 p-8 rounded-xl shadow-inner border-t-4 border-secondary-green">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-secondary-green mb-6 text-center">
+                Los Rostros Detrás de PLADS
+            </h3>
+            <div class="grid md:grid-cols-2 gap-8 text-center">
+                <div>
+                    <!-- Placeholder para imagen de fundador -->
+                    <div class="w-24 h-24 bg-primary-purple rounded-full mx-auto mb-3 flex items-center justify-center text-white text-3xl font-bold">CB</div>
+                    <h4 class="text-xl font-semibold text-primary-purple dark:text-secondary-green">Claudia Bravo</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Cofundadora, Ingeniera Cívil, Bailarina y Visionaria del Bienestar</p>
+                </div>
+                <div>
+                    <!-- Placeholder para imagen de fundador -->
+                    <div class="w-24 h-24 bg-secondary-green rounded-full mx-auto mb-3 flex items-center justify-center text-primary-purple text-3xl font-bold">JB</div>
+                    <h4 class="text-xl font-semibold text-secondary-green">José Ballesteros</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Cofundador y Experto en Ecosistemas Digitales | Project Management & Data Analytics</p>
                 </div>
             </div>
-        </section>
+            <p class="text-center text-gray-700 dark:text-gray-300 mt-6 pt-4 border-t border-gray-300 dark:border-gray-600">
+                PLADS nació de la necesidad de digitalizar y profesionalizar el mercado de servicios de bienestar y fitness en América Latina.
+            </p>
+        </div>
 
-        <!-- Servicios - General Section -->
-        <section id="servicios-general" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Servicios - Información General</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3 class="card-title">📚 Cursos Disponibles</h3>
-                        <p class="card-text">Accede a una amplia variedad de cursos diseñados por expertos en diferentes áreas del conocimiento y desarrollo personal.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🎓 Certificaciones</h3>
-                        <p class="card-text">Obtén certificados reconocidos al completar tus cursos, validando tus nuevas habilidades y conocimientos ante la comunidad.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">💬 Comunidad Activa</h3>
-                        <p class="card-text">Participa en foros, webinarios y grupos de estudio con otros estudiantes y mentores de PLADS.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">📊 Seguimiento Progreso</h3>
-                        <p class="card-text">Monitorea tu avance con nuestro sistema de analytics detallado y recibe recomendaciones personalizadas.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🎯 Mentorías</h3>
-                        <p class="card-text">Conéctate con mentores experimentados que te guiarán en tu camino hacia el éxito profesional.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🌟 Recursos Premium</h3>
-                        <p class="card-text">Accede a materiales exclusivos, libros digitales y herramientas avanzadas con nuestro plan premium.</p>
-                    </div>
-                </div>
+        <!-- PROPÓSITO -->
+        <div class="space-y-4">
+            <h3 class="text-3xl font-extrabold text-tertiary-sky dark:text-secondary-green mb-4 flex items-center">
+                <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.275a1.996 1.996 0 00-2.828 0L9 10.172 5.207 6.379a1.996 1.996 0 10-2.828 2.828L7.379 13l-4.242 4.243a1.996 1.996 0 102.828 2.828L9 15.828l3.621 3.621a1.996 1.996 0 102.828-2.828L12.414 13l4.242-4.243a1.996 1.996 0 000-2.828z"></path></svg>
+                El Propósito Fundamental: La Creación de una Comunidad Digital
+            </h3>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                Nuestro propósito es doble: <span class="font-bold">crear una comunidad digital vibrante</span> donde los usuarios encuentren actividades que los ayuden a crecer, entretenerse, liberar estrés o cuidar su salud. En paralelo, buscamos que los profesores tengan una herramienta que les <span class="font-bold">potencie, conecte y les permita dedicarse de lleno a su vocación: enseñar.</span>
+            </p>
+            <p class="text-md text-gray-600 dark:text-gray-400 border-l-4 border-tertiary-sky dark:border-secondary-green pl-4 italic">
+                Este enfoque aborda el desafío principal de los instructores en América Latina, que gastan energía valiosa en la gestión administrativa (pagos y agendamiento vía WhatsApp/Instagram). Al liberarles de estas tareas, PLADS asegura que su foco sea la enseñanza y el crecimiento.
+            </p>
+        </div>
+
+        <!-- MISIÓN -->
+        <div class="space-y-4">
+            <h3 class="text-3xl font-extrabold text-secondary-green mb-4 flex items-center">
+                <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Nuestra Misión Operativa: Conectar, Gestionar y Crecer
+            </h3>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                La misión de PLADS es <span class="font-bold text-primary-purple dark:text-secondary-green">conectar a personas con los mejores profesores de Arte, Deporte y Salud</span>, ofreciendo una plataforma para <span class="font-bold text-primary-purple dark:text-secondary-green">descubrir, reservar y pagar clases de forma fácil y segura</span>. Al mismo tiempo, entregamos a los profesores una plataforma integral de gestión y crecimiento profesional.
+            </p>
+            <p class="text-center font-bold text-xl text-primary-purple dark:text-secondary-green mt-6">
+                Nuestro Slogan: "PLADS conecta a quienes quieren aprender con quienes aman enseñar."
+            </p>
+        </div>
+
+    </div>
+</section>
+        
+<!-- 2.1. Sección de Servicios - Visión General (Landing) -->
+<section id="servicios-general" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple dark:text-secondary-green text-center mb-12 border-b-4 border-tertiary-sky pb-4">
+        Visión General PLADS: Un Ecosistema para Crecer
+    </h2>
+    
+    <div class="space-y-12 max-w-5xl mx-auto">
+        <p class="text-xl text-gray-700 dark:text-gray-300 text-center">
+            Nuestra misión es simple: <span class="font-bold">ofrecer un espacio para descubrir, reservar y pagar clases de forma fácil y segura, mientras entregamos a los profesores herramientas integrales de gestión y visibilidad para su crecimiento.</span>
+        </p>
+
+        <!-- Modelo de Negocio Híbrido -->
+        <div class="bg-light-gray dark:bg-gray-700 p-8 rounded-xl shadow-inner border-t-4 border-secondary-green">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center justify-center">
+                <svg class="w-6 h-6 mr-2 text-primary-purple dark:text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V8m0 4V12"></path></svg>
+                Modelo de Negocio (SaaS + Marketplace)
+            </h3>
+            <p class="text-lg text-gray-600 dark:text-gray-400 text-center">
+                PLADS opera bajo un modelo híbrido, donde los <span class="font-bold">profesores son nuestro cliente directo</span>. Ellos pagan una <span class="font-bold">comisión por transacción</span> (del 10% al 2,9% según el plan) y una <span class="font-bold">mensualidad</span> para acceder a beneficios premium como estadísticas avanzadas y soporte prioritario.
+            </p>
+        </div>
+
+        <!-- Resumen de Beneficios -->
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-b-4 border-secondary-green">
+                <svg class="w-12 h-12 text-secondary-green mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Descubre y Conecta</h4>
+                <p class="text-gray-600 dark:text-gray-400">Usuarios encuentran su actividad perfecta. Instructores ganan visibilidad instantánea.</p>
             </div>
-        </section>
-
-        <!-- Servicios - Instructores Section -->
-        <section id="servicios-instructores" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Servicios para Instructores</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3 class="card-title">📝 Creación de Cursos</h3>
-                        <p class="card-text">Herramientas intuitivas para crear y organizar tus cursos con contenido multimedia, quizzes y tareas.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">👨‍🎓 Gestión de Estudiantes</h3>
-                        <p class="card-text">Panel de control completo para monitorear el progreso de tus estudiantes y proporcionar feedback personalizado.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">💰 Sistema de Ingresos</h3>
-                        <p class="card-text">Gana dinero con tus cursos. Recibe pagos automáticos y reportes detallados de tus ganancias.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">📈 Analytics Avanzado</h3>
-                        <p class="card-text">Obtén insights detallados sobre el rendimiento de tus cursos y la satisfacción de los estudiantes.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🎤 Webinarios en Vivo</h3>
-                        <p class="card-text">Realiza sesiones en vivo con tus estudiantes, con capacidad para cientos de participantes simultáneos.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🏆 Certificación Profesional</h3>
-                        <p class="card-text">Emite certificados profesionales a tus estudiantes una vez completan el curso.</p>
-                    </div>
-                </div>
+            <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-b-4 border-primary-purple">
+                <svg class="w-12 h-12 text-primary-purple dark:text-secondary-green mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Herramientas Pro</h4>
+                <p class="text-gray-600 dark:text-gray-400">Gestión integral de horarios, alumnos y finanzas (Dashboard SaaS).</p>
             </div>
-        </section>
-
-        <!-- Servicios - Usuarios Section -->
-        <section id="servicios-usuarios" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Servicios para Usuarios</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3 class="card-title">🎓 Aprendizaje Flexible</h3>
-                        <p class="card-text">Aprende a tu propio ritmo, accede a los cursos en cualquier momento y desde cualquier dispositivo.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🔍 Búsqueda Inteligente</h3>
-                        <p class="card-text">Encuentra los cursos perfectos para ti con nuestro sistema de recomendaciones basado en IA.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">💬 Soporte 24/7</h3>
-                        <p class="card-text">Accede a soporte técnico y educativo en cualquier momento. Nuestro equipo siempre está disponible.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🌐 Comunidad Global</h3>
-                        <p class="card-text">Conéctate con estudiantes de todo el mundo, comparte experiencias y amplía tu red profesional.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">📱 Acceso Móvil</h3>
-                        <p class="card-text">Continúa tu aprendizaje en movimiento con nuestra aplicación móvil optimizada para iOS y Android.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">🎁 Recompensas y Beneficios</h3>
-                        <p class="card-text">Gana puntos por cada curso completado y canjéalos por descuentos y acceso a contenido premium.</p>
-                    </div>
-                </div>
+            <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-b-4 border-tertiary-sky">
+                <svg class="w-12 h-12 text-tertiary-sky mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-3m0 0l-1.5-1.5M22 17L19.5 19.5m-3.5-7l3.5-3.5M10 17H5v-3m0 0l1.5-1.5M5 17L7.5 19.5m7 0l1.5-1.5M10 7l-1.5-1.5M7 10l-1.5-1.5"></path></svg>
+                <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Transacciones Seguras</h4>
+                <p class="text-gray-600 dark:text-gray-400">Sistema de pago integrado para reservas fáciles y cobros confiables.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Contacto Section -->
-        <section id="contacto" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Contacto</h2>
-                <p class="section-subtitle">¿Tienes preguntas? Nos encantaría escucharte</p>
+        <div class="text-center pt-8">
+            <p class="text-xl font-semibold mb-4 text-primary-purple dark:text-secondary-green">¿Qué perfil te identifica?</p>
+            <button onclick="event.preventDefault(); showSection('servicios-instructores')" class="bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 mr-4 shadow-md">Soy Instructor</button>
+            <button onclick="event.preventDefault(); showSection('servicios-usuarios')" class="bg-secondary-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">Soy Usuario</button>
+        </div>
+    </div>
+</section>
+        
+       <!-- 2.2. Sección de Servicios - Instructores (Landing) -->
+<section id="servicios-instructores" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-secondary-green text-center mb-10 border-b-4 border-secondary-green pb-4">
+        PLADS para Instructores: Crece y Administra tu Academia
+    </h2>
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        <p class="text-xl text-gray-700 dark:text-gray-300">
+            Tu pasión es enseñar, nuestro trabajo es hacer que sea fácil y rentable. PLADS te proporciona una plataforma robusta para manejar todos los aspectos de tu negocio de clases de actividad física.
+        </p>
+
+        <!-- Beneficios Detallados -->
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-secondary-green">
+                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Visibilidad y Alcance</h4>
+                <p class="text-gray-600 dark:text-gray-400">Llega a nuevos alumnos en tu ciudad o en línea, expandiendo tu marca más allá de tus redes sociales.</p>
+            </div>
+            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-secondary-green">
+                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Dashboard Centralizado (Firebase Studio)</h4>
+                <p class="text-gray-600 dark:text-gray-400">Gestión completa de calendarios, reservas y finanzas desde un panel intuitivo, alojado en Firebase Studio.</p>
+            </div>
+            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-secondary-green">
+                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Pagos Automáticos y Seguros</h4>
+                <p class="text-gray-600 dark:text-gray-400">Olvídate del papeleo. Nuestro sistema de cobros automatizado asegura que recibas tus ingresos a tiempo y sin complicaciones.</p>
+            </div>
+            <div class="p-5 bg-light-gray dark:bg-gray-700 rounded-lg shadow-md border-l-4 border-secondary-green">
+                <h4 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Herramientas de Comunicación</h4>
+                <p class="text-gray-600 dark:text-gray-400">Mantén contacto directo con tus alumnos para recordatorios, cancelaciones o mensajes de motivación.</p>
+            </div>
+        </div>
+
+        <div class="text-center pt-6">
+            <a href="#" onclick="event.preventDefault(); showSection('login')" class="inline-block bg-secondary-green hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl">
+                Únete como Instructor
+            </a>
+        </div>
+    </div>
+</section>
+
+   <!-- 2.3. Sección de Servicios - Usuarios (Landing) -->
+<section id="servicios-usuarios" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-tertiary-sky text-center mb-10 border-b-4 border-tertiary-sky pb-4">
+        PLADS para Usuarios: Empieza a Moverte y a Conectar
+    </h2>
+
+    <div class="max-w-5xl mx-auto space-y-8">
+        <p class="text-xl text-gray-700 dark:text-gray-300 text-center">
+            Encuentra la clase perfecta que se ajuste a tu horario, nivel y pasión. Olvídate de buscar en múltiples lugares; PLADS centraliza la mejor oferta de instructores calificados y verificados.
+        </p>
+
+        <!-- Botones de Categoría -->
+        <div class="flex justify-center gap-4 flex-wrap">
+            <button id="btn-baile" onclick="showCategory('baile')" class="px-8 py-3 bg-primary-purple text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 shadow-lg transform hover:scale-105">
+                🎵 Baile
+            </button>
+            <button id="btn-deporte" onclick="showCategory('deporte')" class="px-8 py-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold rounded-full hover:bg-gray-400 dark:hover:bg-gray-500 transition duration-300 shadow-lg transform hover:scale-105">
+                💪 Actividad Física
+            </button>
+        </div>
+
+        <!-- Tarjetas de Baile -->
+        <div id="category-baile" class="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in">
+            <div onclick="handleDisciplineClick('bachata')" class="bg-gradient-to-br from-pink-500 to-rose-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">💃</div>
+                <h3 class="font-bold text-lg">Bachata</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('salsa')" class="bg-gradient-to-br from-red-500 to-orange-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🕺</div>
+                <h3 class="font-bold text-lg">Salsa</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('kpop')" class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎤</div>
+                <h3 class="font-bold text-lg">K-pop</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('tango')" class="bg-gradient-to-br from-gray-700 to-gray-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎩</div>
+                <h3 class="font-bold text-lg">Tango</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('dancehall')" class="bg-gradient-to-br from-yellow-500 to-orange-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🔥</div>
+                <h3 class="font-bold text-lg">Dancehall</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('urbano')" class="bg-gradient-to-br from-indigo-600 to-purple-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🎧</div>
+                <h3 class="font-bold text-lg">Urbano</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('twerk')" class="bg-gradient-to-br from-fuchsia-600 to-pink-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🍑</div>
+                <h3 class="font-bold text-lg">Twerk</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('otros-baile')" class="bg-gradient-to-br from-slate-500 to-slate-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">✨</div>
+                <h3 class="font-bold text-lg">Otros</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+        </div>
+
+        <!-- Tarjetas de Actividad Física -->
+        <div id="category-deporte" class="hidden grid-cols-2 md:grid-cols-4 gap-4">
+            <div onclick="handleDisciplineClick('calistenia')" class="bg-gradient-to-br from-blue-600 to-cyan-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🤸</div>
+                <h3 class="font-bold text-lg">Calistenia</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('funcional')" class="bg-gradient-to-br from-green-600 to-emerald-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🏋️</div>
+                <h3 class="font-bold text-lg">Funcional</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('yoga')" class="bg-gradient-to-br from-purple-400 to-pink-500 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🧘</div>
+                <h3 class="font-bold text-lg">Yoga</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('pilates')" class="bg-gradient-to-br from-teal-500 to-cyan-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🤸‍♀️</div>
+                <h3 class="font-bold text-lg">Pilates</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('zumba')" class="bg-gradient-to-br from-orange-500 to-red-600 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">💃</div>
+                <h3 class="font-bold text-lg">Zumba</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('boxeo')" class="bg-gradient-to-br from-red-700 to-red-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">🥊</div>
+                <h3 class="font-bold text-lg">Boxeo</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('crossfit')" class="bg-gradient-to-br from-gray-700 to-gray-900 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">⚡</div>
+                <h3 class="font-bold text-lg">CrossFit</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+            
+            <div onclick="handleDisciplineClick('otros-deporte')" class="bg-gradient-to-br from-slate-500 to-slate-700 p-6 rounded-xl shadow-lg text-white text-center cursor-pointer transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                <div class="text-4xl mb-2">✨</div>
+                <h3 class="font-bold text-lg">Otros</h3>
+                <p class="text-xs opacity-90 mt-1">Próximamente</p>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="text-center pt-6 mt-8 border-t border-gray-200 dark:border-gray-700">
+            <a href="#" onclick="event.preventDefault(); showSection('login')" class="inline-block bg-tertiary-sky hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-xl">
+                Encuentra tu Clase
+            </a>
+        </div>
+    </div>
+</section>
+
+    
+<!-- 3. Sección de Contacto -->
+<section id="contacto" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-4xl font-bold text-primary-purple dark:text-secondary-green text-center mb-10">
+        Hablemos de tu Proyecto
+    </h2>
+
+    <div class="max-w-lg mx-auto bg-light-gray dark:bg-gray-700 p-8 rounded-lg shadow-inner">
+        <p class="text-gray-600 dark:text-gray-400 mb-6 text-center">
+            ¿Tienes dudas, sugerencias, o quieres formar parte de nuestro equipo de instructores? Contáctanos.
+        </p>
+        <form id="contact-form" onsubmit="return handleFormSubmit(event)">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Nombre Completo</label>
+                <input type="text" id="name" name="from_name" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
+                <input type="email" id="email" name="from_email" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required>
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Mensaje</label>
+                <textarea id="message" name="message" rows="4" class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:ring-primary-purple focus:border-primary-purple transition duration-200" required></textarea>
+            </div>
+            <button type="submit" id="submit-button" class="w-full bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition duration-300 shadow-lg">
+                Enviar Mensaje
+            </button>
+            <p id="contact-message" class="mt-4 text-center text-sm font-medium hidden"></p>
+        </form>
+    </div>
+</section>
+
+      <!-- 4. Sección de Precios -->
+<section id="precios" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-primary-purple dark:text-secondary-green text-center mb-10 border-b-4 border-tertiary-sky pb-4">
+        Planes para Instructores
+    </h2>
+
+    <div class="max-w-6xl mx-auto">
+        <p class="text-xl text-gray-700 dark:text-gray-300 text-center mb-12">
+            Elige el plan que mejor se adapte a tu negocio. Sin compromisos, cambia cuando quieras.
+        </p>
+
+        <!-- Grid de Planes -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Plan Comisión -->
+            <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8 flex flex-col border-2 border-gray-200 dark:border-gray-600 hover:shadow-2xl transition duration-300">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-primary-purple dark:text-secondary-green mb-2">Comisión</h3>
+                    <div class="mb-4">
+                        <p class="text-4xl font-bold text-gray-900 dark:text-white">10%</p>
+                        <p class="text-sm font-medium text-secondary-green">por transacción</p>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">Ideal para empezar sin costos fijos. Solo pagas cuando generas ingresos.</p>
+                </div>
                 
-                <div style="max-width: 600px; margin: 0 auto;">
-                    <div id="contact-message"></div>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label class="form-label" for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="asunto">Asunto</label>
-                            <input type="text" id="asunto" name="asunto" class="form-input" placeholder="Asunto del mensaje" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" name="mensaje" class="form-textarea" placeholder="Tu mensaje..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="form-button">Enviar Mensaje</button>
-                    </form>
-
-                    <div style="margin-top: 3rem; text-align: center;">
-                        <h3 class="card-title">Información de Contacto</h3>
-                        <p style="margin: 1rem 0;">📧 Email: contacto@plads.com</p>
-                        <p style="margin: 1rem 0;">📱 Teléfono: +1 (555) 123-4567</p>
-                        <p style="margin: 1rem 0;">📍 Ubicación: Calle Principal 123, Ciudad, País</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Precios Section -->
-        <section id="precios" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Planes de Precios</h2>
-                <p class="section-subtitle">Elige el plan perfecto para ti</p>
+                <ul class="space-y-3 mb-8 flex-grow text-sm">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Publicación de clases ilimitadas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Gestión de agendamientos</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Perfil público</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Reportes básicos</span>
+                    </li>
+                </ul>
                 
-                <div class="grid">
-                    <div class="card" style="text-align: center;">
-                        <h3 class="card-title">Plan Básico</h3>
-                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">$9.99</p>
-                        <p style="color: #999; margin-bottom: 1.5rem;">/mes</p>
-                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
-                            <li style="margin: 0.5rem 0;">✅ Acceso a 50+ cursos</li>
-                            <li style="margin: 0.5rem 0;">✅ Certificados básicos</li>
-                            <li style="margin: 0.5rem 0;">❌ Mentorías</li>
-                            <li style="margin: 0.5rem 0;">❌ Contenido premium</li>
-                        </ul>
-                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Seleccionar</button>
-                    </div>
-
-                    <div class="card" style="text-align: center; border: 2px solid #667eea;">
-                        <p style="color: #667eea; font-weight: bold; margin-bottom: 1rem;">⭐ MÁS POPULAR</p>
-                        <h3 class="card-title">Plan Pro</h3>
-                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">$24.99</p>
-                        <p style="color: #999; margin-bottom: 1.5rem;">/mes</p>
-                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
-                            <li style="margin: 0.5rem 0;">✅ Acceso ilimitado a cursos</li>
-                            <li style="margin: 0.5rem 0;">✅ Certificados profesionales</li>
-                            <li style="margin: 0.5rem 0;">✅ Mentorías mensuales</li>
-                            <li style="margin: 0.5rem 0;">✅ Contenido premium</li>
-                        </ul>
-                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Seleccionar</button>
-                    </div>
-
-                    <div class="card" style="text-align: center;">
-                        <h3 class="card-title">Plan Empresarial</h3>
-                        <p style="font-size: 2.5rem; font-weight: bold; color: #667eea; margin: 1rem 0;">Personalizado</p>
-                        <p style="color: #999; margin-bottom: 1.5rem;">Soluciones a medida</p>
-                        <ul style="text-align: left; margin-bottom: 1.5rem; list-style: none;">
-                            <li style="margin: 0.5rem 0;">✅ Acceso empresarial completo</li>
-                            <li style="margin: 0.5rem 0;">✅ Soporte dedicado 24/7</li>
-                            <li style="margin: 0.5rem 0;">✅ Programas de capacitación</li>
-                            <li style="margin: 0.5rem 0;">✅ Integraciones personalizadas</li>
-                        </ul>
-                        <button class="hero-cta" style="width: 100%; margin-top: auto;">Contactar Ventas</button>
-                    </div>
-                </div>
-
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>Característica</th>
-                            <th>Básico</th>
-                            <th>Pro</th>
-                            <th>Empresarial</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Cursos disponibles</strong></td>
-                            <td>50+</td>
-                            <td>Ilimitados</td>
-                            <td>Ilimitados</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Certificados</strong></td>
-                            <td>Básicos</td>
-                            <td>Profesionales</td>
-                            <td>Profesionales</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mentorías</strong></td>
-                            <td>No</td>
-                            <td>Sí (Mensual)</td>
-                            <td>Sí (Semanal)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Contenido Premium</strong></td>
-                            <td>No</td>
-                            <td>Sí</td>
-                            <td>Sí</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Soporte</strong></td>
-                            <td>Email</td>
-                            <td>Email y Chat</td>
-                            <td>24/7 Dedicado</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Acceso Móvil</strong></td>
-                            <td>Sí</td>
-                            <td>Sí</td>
-                            <td>Sí</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <button onclick="event.preventDefault(); showSection('contacto')" class="w-full bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition duration-300">
+                    Comenzar Gratis
+                </button>
             </div>
-        </section>
 
-        <!-- Login/Dashboard Section -->
-        <section id="login" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Login / Dashboard</h2>
+            <!-- Plan Básico -->
+            <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8 flex flex-col border-2 border-gray-200 dark:border-gray-600 hover:shadow-2xl transition duration-300">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-primary-purple dark:text-secondary-green mb-2">Básico</h3>
+                    <div class="mb-4">
+                        <p class="text-4xl font-bold text-gray-900 dark:text-white">$14.990</p>
+                        <p class="text-sm font-medium text-secondary-green">mensual + 5% comisión</p>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">Reduce la comisión y accede a más herramientas para crecer.</p>
+                </div>
                 
-                <div style="max-width: 500px; margin: 0 auto;">
-                    <div id="login-section">
-                        <div class="card">
-                            <h3 class="card-title" style="text-align: center;">Inicia Sesión</h3>
-                            <div id="login-message"></div>
-                            <form id="loginForm">
-                                <div class="form-group">
-                                    <label class="form-label" for="login-email">Email</label>
-                                    <input type="email" id="login-email" name="email" class="form-input" placeholder="tu@email.com" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="login-password">Contraseña</label>
-                                    <input type="password" id="login-password" name="password" class="form-input" placeholder="Tu contraseña" required>
-                                </div>
-                                
-                                <button type="submit" class="form-button">Inicia Sesión</button>
-                            </form>
-                            
-                            <p style="text-align: center; margin-top: 1.5rem;">
-                                ¿No tienes cuenta? <a href="#" onclick="toggleAuthMode()" style="color: #667eea; text-decoration: none; font-weight: bold;">Regístrate aquí</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div id="register-section" style="display: none;">
-                        <div class="card">
-                            <h3 class="card-title" style="text-align: center;">Crear Cuenta</h3>
-                            <div id="register-message"></div>
-                            <form id="registerForm">
-                                <div class="form-group">
-                                    <label class="form-label" for="register-nombre">Nombre Completo</label>
-                                    <input type="text" id="register-nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="register-email">Email</label>
-                                    <input type="email" id="register-email" name="email" class="form-input" placeholder="tu@email.com" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="register-password">Contraseña</label>
-                                    <input type="password" id="register-password" name="password" class="form-input" placeholder="Crea una contraseña" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="register-tipo">Tipo de Usuario</label>
-                                    <select id="register-tipo" name="tipo" class="form-input" required>
-                                        <option value="">Selecciona tu tipo</option>
-                                        <option value="estudiante">Estudiante</option>
-                                        <option value="instructor">Instructor</option>
-                                    </select>
-                                </div>
-                                
-                                <button type="submit" class="form-button">Crear Cuenta</button>
-                            </form>
-                            
-                            <p style="text-align: center; margin-top: 1.5rem;">
-                                ¿Ya tienes cuenta? <a href="#" onclick="toggleAuthMode()" style="color: #667eea; text-decoration: none; font-weight: bold;">Inicia sesión aquí</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dashboard" style="display: none; margin-top: 2rem;">
-                    <div class="card" style="text-align: center;">
-                        <h3 class="card-title">Bienvenido al Dashboard</h3>
-                        <p style="margin: 1rem 0;">Aquí podrás ver tus cursos, progreso y mensajes.</p>
-                        <button class="hero-cta" onclick="logout()" style="width: auto; margin-top: 1rem;">Cerrar Sesión</button>
-                    </div>
-                </div>
+                <ul class="space-y-3 mb-8 flex-grow text-sm">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300"><span class="font-semibold">Todo en Comisión</span>, más:</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Reportes avanzados</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Campañas de email</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Soporte prioritario</span>
+                    </li>
+                </ul>
+                
+                <button onclick="event.preventDefault(); showSection('contacto')" class="w-full bg-primary-purple hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition duration-300">
+                    Solicitar Plan
+                </button>
             </div>
-        </section>
+
+            <!-- Plan Pro -->
+            <div class="bg-white dark:bg-gray-700 rounded-xl shadow-xl p-8 flex flex-col border-2 border-primary-purple dark:border-secondary-green ring-2 ring-primary-purple dark:ring-secondary-green transform hover:scale-105 transition duration-300">
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-primary-purple dark:text-secondary-green">Pro</h3>
+                        <span class="bg-primary-purple dark:bg-secondary-green text-white dark:text-gray-900 text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-4xl font-bold text-gray-900 dark:text-white">$29.990</p>
+                        <p class="text-sm font-medium text-secondary-green">mensual + 2.9% comisión</p>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">La comisión más baja y herramientas de IA para potenciar tu negocio.</p>
+                </div>
+                
+                <ul class="space-y-3 mb-8 flex-grow text-sm">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300"><span class="font-semibold">Todo en Básico</span>, más:</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Asistente IA para marketing</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Creación de academia</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-gray-700 dark:text-gray-300">Comisión más baja</span>
+                    </li>
+                </ul>
+                
+                <button onclick="event.preventDefault(); showSection('contacto')" class="w-full bg-primary-purple dark:bg-secondary-green hover:bg-purple-800 dark:hover:bg-green-600 text-white dark:text-gray-900 font-bold py-3 rounded-lg transition duration-300 shadow-lg">
+                    Solicitar Plan Pro
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+        
+      <!-- 5. Sección de Login / Dashboard -->
+<section id="login" class="section-container hidden p-8 md:p-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg m-4 md:m-8 transition-all duration-500">
+    <h2 class="text-3xl md:text-4xl font-bold text-primary-purple dark:text-secondary-green text-center mb-10">
+        Tu Centro de Control: El Dashboard de PLADS
+    </h2>
+
+    <div class="max-w-4xl mx-auto text-center">
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            El Dashboard es el corazón de tu experiencia en <span class="font-bold text-primary-purple dark:text-secondary-green">PLADS</span>. Está diseñado para ofrecer una gestión completa y visual de tus interacciones, ya seas un instructor o un usuario, y está alojado en <span class="font-bold">Firebase Studio</span>.
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-light-gray dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                <svg class="w-10 h-10 text-primary-purple dark:text-secondary-green mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v14m-6 3l-12 3V6"></path></svg>
+                <p class="font-semibold text-gray-900 dark:text-white">Seguimiento de Clases</p>
+                <small class="text-gray-500 dark:text-gray-400">Visualiza horarios y historial de tus sesiones de baile o yoga.</small>
+            </div>
+            <div class="bg-light-gray dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                <svg class="w-10 h-10 text-primary-purple dark:text-secondary-green mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V8m0 4V12"></path></svg>
+                <p class="font-semibold text-gray-900 dark:text-white">Gestión Financiera</p>
+                <small class="text-gray-500 dark:text-gray-400">Pagos, cobros y administración de ingresos.</small>
+            </div>
+            <div class="bg-light-gray dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                <svg class="w-10 h-10 text-primary-purple dark:text-secondary-green mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 002-2V7a2 2 0 00-2-2H3a2 2 0 00-2 2v4a2 2 0 002 2h3a2 2 0 012 2v2a2 2 0 002 2h4a2 2 0 002-2v-2a2 2 0 012-2h3a2 2 0 002-2z"></path></svg>
+                <p class="font-semibold text-gray-900 dark:text-white">Perfil y Comunicación</p>
+                <small class="text-gray-500 dark:text-gray-400">Actualiza tu información y chatea con instructores/alumnos.</small>
+            </div>
+        </div>
+
+        <p class="text-xl font-medium text-gray-700 dark:text-gray-300 mb-6">
+            ¡El acceso es rápido y seguro! Haz clic abajo para ser redirigido a tu Dashboard.
+        </p>
+
+        <!-- Botón de Redirección a Firebase Studio -->
+        <a href="https://studio--studio-4308693113-a4650.us-central1.hosted.app/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary-purple hover:bg-purple-800 text-white font-extrabold py-4 px-12 rounded-lg text-xl transition duration-300 shadow-2xl transform hover:scale-105">
+            Ir al Dashboard (Demo)
+        </a>
+        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            *Serás redirigido al entorno de demostración de Firebase Studio.
+        </p>
+    </div>
+</section>
+
+        
     </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-text">&copy; 2025 PLADS - Plataforma de Aprendizaje y Desarrollo Social. Todos los derechos reservados.</div>
-        <div class="footer-text">Hecho con ❤️ para conectar el movimiento</div>
+    
+    <!-- Footer Básico -->
+    <footer class="bg-gray-800 text-white p-6 mt-10">
+        <div class="max-w-7xl mx-auto text-center text-sm">
+            <p>&copy; 2024 PLADS. Todos los derechos reservados.</p>
+            <p class="mt-1">Hecho con ❤️ para conectar el movimiento.</p>
+        </div>
     </footer>
 
+        <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("htGLaYLpLd79rBZSJ"); // Reemplaza con tu Public Key
+        })();
+    </script>
+
+    <!-- Lógica JavaScript para la Navegación y Dropdowns -->
     <script>
-        // Initialize EmailJS
-        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your actual public key
+        const sections = document.querySelectorAll('.section-container');
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const contactMessage = document.getElementById('contact-message');
+        
+        const serviceDropdownMenuDesktop = document.getElementById('service-dropdown-menu-desktop');
+        const serviceDropdownButtonDesktop = document.getElementById('service-dropdown-button-desktop');
+        const dropdownIconDesktop = document.getElementById('dropdown-icon-desktop');
 
-        // Dark Mode Toggle
+        const mobileServiceMenu = document.getElementById('mobile-service-menu');
+        const mobileServiceButton = document.getElementById('mobile-service-button');
+        const mobileDropdownIcon = document.getElementById('mobile-dropdown-icon');
+        
+        // Función para alternar el menú de servicios (desktop o móvil)
+        function toggleServiceDropdown(type) {
+            if (type === 'desktop') {
+                const isHidden = serviceDropdownMenuDesktop.classList.toggle('hidden');
+                dropdownIconDesktop.classList.toggle('rotate-180', !isHidden);
+            } else { // mobile
+                const isHidden = mobileServiceMenu.classList.toggle('hidden');
+                mobileDropdownIcon.classList.toggle('rotate-180', !isHidden);
+            }
+        }
+
+        // Función para ocultar el menú de servicios
+        function hideServiceDropdown(type) {
+            if (type === 'desktop' && !serviceDropdownMenuDesktop.classList.contains('hidden')) {
+                serviceDropdownMenuDesktop.classList.add('hidden');
+                dropdownIconDesktop.classList.remove('rotate-180');
+            } else if (type === 'mobile' && !mobileServiceMenu.classList.contains('hidden')) {
+                mobileServiceMenu.classList.add('hidden');
+                mobileDropdownIcon.classList.remove('rotate-180');
+            }
+        }
+
+
+       /**
+     * Muestra la sección solicitada y actualiza la URL
+     * @param {string} sectionId - El ID de la sección a mostrar
+     * @param {boolean} updateHistory - Si debe actualizar el historial del navegador
+     */
+    function showSection(sectionId, updateHistory = true) {
+        sections.forEach(section => {
+            // Ocultar todas las secciones
+            section.classList.add('hidden');
+            section.classList.remove('block');
+        });
+
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            // Mostrar la sección objetivo
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('block');
+            
+            // Actualizar la URL sin recargar la página
+            if (updateHistory) {
+                const newUrl = sectionId === 'inicio' ? '/' : `/${sectionId}`;
+                window.history.pushState({ section: sectionId }, '', newUrl);
+                
+                // Actualizar el título de la página
+                updatePageTitle(sectionId);
+            }
+        }
+        
+        // Asegura que siempre volvemos al inicio de la página al cambiar de sección
+        window.scrollTo(0, 0);
+    }
+    
+    /**
+     * Actualiza el título de la página según la sección
+     */
+    function updatePageTitle(sectionId) {
+        const titles = {
+            'inicio': 'PLADS - Plataforma de Arte, Deporte & Salud',
+            'quienes-somos': 'Quiénes Somos - PLADS',
+            'servicios-general': 'Servicios - PLADS',
+            'servicios-instructores': 'Para Instructores - PLADS',
+            'servicios-usuarios': 'Para Usuarios - PLADS',
+            'precios': 'Precios - PLADS',
+            'contacto': 'Contacto - PLADS',
+            'login': 'Dashboard - PLADS'
+        };
+        
+        document.title = titles[sectionId] || 'PLADS';
+    }
+    
+    /**
+     * Maneja la navegación con los botones Atrás/Adelante del navegador
+     */
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.section) {
+            showSection(event.state.section, false);
+        } else {
+            // Si no hay estado, mostrar inicio
+            showSection('inicio', false);
+        }
+    });
+    
+    /**
+     * Detecta la URL al cargar la página y muestra la sección correspondiente
+     */
+    function loadSectionFromURL() {
+        const path = window.location.pathname;
+        
+        // Mapeo de rutas a IDs de sección
+        const routes = {
+            '/': 'inicio',
+            '/inicio': 'inicio',
+            '/quienes-somos': 'quienes-somos',
+            '/servicios-general': 'servicios-general',
+            '/servicios': 'servicios-general',
+            '/servicios-instructores': 'servicios-instructores',
+            '/instructores': 'servicios-instructores',
+            '/servicios-usuarios': 'servicios-usuarios',
+            '/usuarios': 'servicios-usuarios',
+            '/precios': 'precios',
+            '/contacto': 'contacto',
+            '/login': 'login',
+            '/dashboard': 'login'
+        };
+        
+        const sectionId = routes[path] || 'inicio';
+        showSection(sectionId, false);
+        
+        // Establecer el estado inicial
+        window.history.replaceState({ section: sectionId }, '', path);
+    }
+        /**
+         * Maneja el envío del formulario de contacto (solo simulación).
+         */
+        function handleFormSubmit(event) {
+            event.preventDefault();
+           // Obtener elementos
+    const submitButton = document.getElementById('submit-button');
+    const contactMessage = document.getElementById('contact-message');
+    const form = document.getElementById('contact-form');
+    
+    // Mostrar indicador de carga
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Enviando...';
+    submitButton.disabled = true;
+    
+    // Preparar datos del formulario
+    const templateParams = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        to_email: 'hola@plads.cl'
+    };
+    
+    // Enviar email con EmailJS
+    emailjs.send('service_d959lgp', 'template_l4x8m7m', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            
+            // Mostrar mensaje de éxito
+            contactMessage.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
+            contactMessage.classList.remove('hidden', 'text-red-600');
+            contactMessage.classList.add('text-secondary-green');
+            
+            // Limpiar formulario
+            form.reset();
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                contactMessage.classList.add('hidden');
+            }, 5000);
+        }, function(error) {
+            console.log('FAILED...', error);
+            
+            // Mostrar mensaje de error
+            contactMessage.textContent = 'Error al enviar el mensaje. Por favor, intenta de nuevo.';
+            contactMessage.classList.remove('hidden', 'text-secondary-green');
+            contactMessage.classList.add('text-red-600');
+            
+            setTimeout(() => {
+                contactMessage.classList.add('hidden');
+            }, 3000);
+        })
+        .finally(() => {
+            // Restaurar botón
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+    
+    return false;
+}
+        // Toggle del menú móvil
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hideServiceDropdown('desktop'); // Asegura que el desktop dropdown se oculte si se abre el móvil
+        });
+
+        function hideMobileMenu() {
+             mobileMenu.classList.add('hidden');
+             hideServiceDropdown('mobile'); // Asegura que el service dropdown móvil se oculte
+        }
+
+        // Event Listeners para los dropdowns
+        serviceDropdownButtonDesktop.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Cerrar el dropdown si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            if (!serviceDropdownButtonDesktop.contains(e.target) && !serviceDropdownMenuDesktop.contains(e.target)) {
+                hideServiceDropdown('desktop');
+            }
+        });
+
+        // Inicializar mostrando la sección 'inicio'
+        window.onload = () => {
+            loadSectionFromURL();
+        };
+       // ============================================
+        // MODO OSCURO
+        // ============================================
+
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const darkModeToggleMobile = document.getElementById('dark-mode-toggle-mobile');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIconMobile = document.getElementById('sun-icon-mobile');
+        const moonIconMobile = document.getElementById('moon-icon-mobile');
+        const darkModeText = document.getElementById('dark-mode-text');
+
+        // Verificar preferencia guardada o del sistema
+        function initDarkMode() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+                updateIcons(true);
+            } else {
+                updateIcons(false);
+            }
+        }
+
+        // Actualizar iconos
+        function updateIcons(isDark) {
+            if (isDark) {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                sunIconMobile.classList.remove('hidden');
+                moonIconMobile.classList.add('hidden');
+                if (darkModeText) darkModeText.textContent = 'Modo Claro';
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                sunIconMobile.classList.add('hidden');
+                moonIconMobile.classList.remove('hidden');
+                if (darkModeText) darkModeText.textContent = 'Modo Oscuro';
+            }
+        }
+
+        // Toggle modo oscuro
         function toggleDarkMode() {
-            const body = document.body;
-            const navbar = document.querySelector('.navbar');
-            const dropdowns = document.querySelectorAll('.dropdown');
-            
-            body.classList.toggle('dark-mode');
-            navbar.classList.toggle('dark-mode');
-            dropdowns.forEach(dropdown => dropdown.classList.toggle('dark-mode'));
-            
-            // Save preference
-            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
-            
-            // Update icon
-            const toggle = document.querySelector('.dark-mode-toggle');
-            toggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcons(isDark);
         }
 
-        // Load dark mode preference
-        window.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('darkMode') === 'true') {
-                toggleDarkMode();
-            }
-        });
+        // Event listeners
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+        darkModeToggleMobile.addEventListener('click', toggleDarkMode);
 
-        // Navigation
-        function navigateTo(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // Show selected section
-            const selectedSection = document.getElementById(sectionId);
-            if (selectedSection) {
-                selectedSection.classList.add('active');
-                window.scrollTo(0, 0);
-            }
-        }
+        // Inicializar al cargar
+        initDarkMode(); 
 
-        // Auth Mode Toggle
-        function toggleAuthMode() {
-            const loginSection = document.getElementById('login-section');
-            const registerSection = document.getElementById('register-section');
-            
-            loginSection.style.display = loginSection.style.display === 'none' ? 'block' : 'none';
-            registerSection.style.display = registerSection.style.display === 'none' ? 'block' : 'none';
-        }
+        // ============================================
+// CATEGORÍAS DE DISCIPLINAS (Usuarios)
+// ============================================
 
-        // Login Form Handler
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Simulate login
-            if (email && password) {
-                localStorage.setItem('user', JSON.stringify({ email, name: email.split('@')[0] }));
-                showLoginMessage('¡Bienvenido! Has iniciado sesión correctamente.', 'success');
-                
-                setTimeout(() => {
-                    document.getElementById('login-section').style.display = 'none';
-                    document.getElementById('dashboard').style.display = 'block';
-                    document.getElementById('loginForm').reset();
-                }, 1500);
-            }
-        });
+function showCategory(category) {
+    const baileCategory = document.getElementById('category-baile');
+    const deporteCategory = document.getElementById('category-deporte');
+    const btnBaile = document.getElementById('btn-baile');
+    const btnDeporte = document.getElementById('btn-deporte');
+    
+    if (category === 'baile') {
+        // Mostrar baile
+        baileCategory.classList.remove('hidden');
+        baileCategory.classList.add('grid');
+        deporteCategory.classList.remove('grid');
+        deporteCategory.classList.add('hidden');
+        
+        // Actualizar estilos de botones
+        btnBaile.classList.remove('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+        btnBaile.classList.add('bg-primary-purple', 'text-white');
+        btnDeporte.classList.remove('bg-primary-purple', 'text-white');
+        btnDeporte.classList.add('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+    } else {
+        // Mostrar deporte
+        deporteCategory.classList.remove('hidden');
+        deporteCategory.classList.add('grid');
+        baileCategory.classList.remove('grid');
+        baileCategory.classList.add('hidden');
+        
+        // Actualizar estilos de botones
+        btnDeporte.classList.remove('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+        btnDeporte.classList.add('bg-primary-purple', 'text-white');
+        btnBaile.classList.remove('bg-primary-purple', 'text-white');
+        btnBaile.classList.add('bg-gray-300', 'dark:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+    }
+}
 
-        // Register Form Handler
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('register-nombre').value;
-            const email = document.getElementById('register-email').value;
-            const tipo = document.getElementById('register-tipo').value;
-            
-            // Simulate registration
-            if (nombre && email && tipo) {
-                localStorage.setItem('user', JSON.stringify({ email, name: nombre, tipo }));
-                showRegisterMessage('¡Cuenta creada exitosamente!', 'success');
-                
-                setTimeout(() => {
-                    document.getElementById('register-section').style.display = 'none';
-                    document.getElementById('dashboard').style.display = 'block';
-                    document.getElementById('registerForm').reset();
-                }, 1500);
-            }
-        });
-
-        // Contact Form Handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const templateParams = {
-                nombre: document.getElementById('nombre').value,
-                email: document.getElementById('email').value,
-                asunto: document.getElementById('asunto').value,
-                mensaje: document.getElementById('mensaje').value
-            };
-            
-            // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
-                    showContactMessage('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
-                    document.getElementById('contactForm').reset();
-                }, function(error) {
-                    showContactMessage('Hubo un error al enviar el mensaje. Intenta más tarde.', 'error');
-                    console.log('EmailJS error:', error);
-                });
-        });
-
-        // Message Display Functions
-        function showContactMessage(message, type) {
-            const messageDiv = document.getElementById('contact-message');
-            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-            setTimeout(() => {
-                messageDiv.innerHTML = '';
-            }, 5000);
-        }
-
-        function showLoginMessage(message, type) {
-            const messageDiv = document.getElementById('login-message');
-            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-            setTimeout(() => {
-                messageDiv.innerHTML = '';
-            }, 5000);
-        }
-
-        function showRegisterMessage(message, type) {
-            const messageDiv = document.getElementById('register-message');
-            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-            setTimeout(() => {
-                messageDiv.innerHTML = '';
-            }, 5000);
-        }
-
-        // Logout Function
-        function logout() {
-            localStorage.removeItem('user');
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('loginForm').reset();
-            navigateTo('login');
-        }
-
-        // Check if user is logged in on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            const user = localStorage.getItem('user');
-            if (user && document.getElementById('dashboard')) {
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            }
-        });
+function handleDisciplineClick(discipline) {
+    // Por ahora solo muestra un mensaje
+    // En el futuro, aquí irá la redirección: window.location.href = `/clases/${discipline}`;
+    console.log(`Clickeaste en: ${discipline}`);
+    alert(`Próximamente: Clases de ${discipline.charAt(0).toUpperCase() + discipline.slice(1)}`);
+    
+    // PARA EL FUTURO (descomenta cuando tengas las páginas):
+    // window.location.href = `/clases/${discipline}`;
+    // o
+    // showSection('lista-clases-' + discipline);
+}
     </script>
 </body>
 </html>
+
