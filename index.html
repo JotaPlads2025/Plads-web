@@ -27,6 +27,14 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
 
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init({ publicKey: "htGLaYLpLd79rBZSJ" });
+    })();
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1201,9 +1209,9 @@
 
   <!-- APP MOCKUPS -->
   <section class="section-app fade-in" id="app">
-    <div class="section-label">La aplicación</div>
-    <h2 class="section-title">Una app hecha para<br>moverse y enseñar</h2>
-    <p class="section-desc">
+    <div class="section-label" style="text-align:center">La aplicación</div>
+    <h2 class="section-title" style="text-align:center">Una app hecha para<br>moverse y enseñar</h2>
+    <p class="section-desc" style="text-align:center;margin-left:auto;margin-right:auto">
       Diseñada desde cero para que usuarios encuentren su clase perfecta y los instructores gestionen su negocio sin fricciones.
     </p>
 
@@ -1490,20 +1498,33 @@
         return;
       }
 
-      // Aquí puedes conectar a tu backend, Airtable, Mailchimp, etc.
-      // Ejemplo: fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({nombre, email, tipo}) })
+      // Deshabilitar botón mientras envía
+      const btn = document.querySelector('.form-submit');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
 
-      document.getElementById('form-fields').style.display = 'none';
-      const successEl = document.getElementById('form-success');
-      successEl.style.display = 'block';
+      emailjs.send('service_d959lgp', 'template_l4x8m7m', {
+        name:  nombre,
+        email: email,
+        tipo:  tipo === 'instructor' ? 'Instructor' : 'Usuario (busca clases)'
+      }).then(function() {
+        document.getElementById('form-fields').style.display = 'none';
+        const successEl = document.getElementById('form-success');
+        successEl.style.display = 'block';
 
-      if (tipo === 'instructor') {
-        document.getElementById('success-title').textContent = '¡Bienvenido, instructor!';
-        document.getElementById('success-msg').textContent = 'Te contactaremos pronto con acceso prioritario a la beta. Revisa tu bandeja de entrada.';
-      } else {
-        document.getElementById('success-title').textContent = '¡Anotado, ' + nombre + '!';
-        document.getElementById('success-msg').textContent = 'Serás de los primeros en encontrar clases en PLADS cuando abramos.';
-      }
+        if (tipo === 'instructor') {
+          document.getElementById('success-title').textContent = '¡Bienvenido, instructor!';
+          document.getElementById('success-msg').textContent = 'Te contactaremos pronto con acceso prioritario a la beta. Revisa tu bandeja de entrada.';
+        } else {
+          document.getElementById('success-title').textContent = '¡Anotado, ' + nombre + '!';
+          document.getElementById('success-msg').textContent = 'Serás de los primeros en encontrar clases en PLADS cuando abramos.';
+        }
+      }, function(error) {
+        btn.textContent = 'Quiero acceso anticipado →';
+        btn.disabled = false;
+        alert('Hubo un error al enviar. Por favor intenta nuevamente.');
+        console.error('EmailJS error:', error);
+      });
     }
 
     // === NAV MOBILE TOGGLE ===
