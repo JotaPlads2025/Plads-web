@@ -1,4 +1,4 @@
-name = "plads-web"
+name = "plads-web-v2"
 main = "src/index.js"
 compatibility_date = "2025-11-17"
 
